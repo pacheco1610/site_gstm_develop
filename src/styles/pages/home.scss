@@ -1,0 +1,101 @@
+.Home-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 1rem;
+}
+
+.Home-title {
+  color: $blue-dark;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 35px;
+
+  h3 {
+    hyphens: none;
+  }
+}
+
+.Home-logo {
+  display: none;
+}
+
+.Home-descripcion {
+  display: none;
+}
+
+.Home-subtitle {
+  color: $bluey-light; 
+  font-size: 20px;
+  font-weight: 900;
+ }
+
+ .Home-sliderText {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@include breakpoint('medium') { 
+  .Home {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .Home-section {
+    min-height:100vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .Home-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+    flex-direction: row;
+
+    .Home-sliderText, .Home-sliderImagen {
+      width: 50%;
+    }
+  }
+
+  .Home-title {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .Home-descripcion {
+    display: block;
+    color: $purple;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+@include breakpoint('medium-high') { 
+  .Home-wrapper {
+    max-width: 1024px;
+  }
+  .Home-title {
+    font-size: 35px;
+    line-height: 50px;
+  }
+
+  .Home-descripcion {
+    font-size: 16px;
+  }
+
+  .Home-logo {
+    display: block;
+    margin-top: 1rem;
+    width: 300px;
+
+    img {
+      width: 100%;
+    }
+  }
+  .Home-sliderImagen {
+    padding-top: 160px;
+  }
+}
+
