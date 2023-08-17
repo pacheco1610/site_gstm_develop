@@ -7,7 +7,7 @@ const home = () => {
   return (
     <div className='Home'>
       <Header/>
-      <section className='Home-section Home-slider'>
+      <section className='Home-section'>
         <div className="Home-wrapper">
           <div className='Home-sliderText'>
             <div className='Home-logo'>
