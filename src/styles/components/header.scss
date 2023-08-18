@@ -1,6 +1,7 @@
 .Header-containerMenu {
   position: fixed;
   opacity: 0;
+  gap: 2rem;
 
   &--active {
     opacity: 1;
@@ -17,7 +18,20 @@
     align-items: center;
     text-align: center;
     transition: all 0.6s ease;
+    z-index: 99;
   }
+}
+
+.Header-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.Header-li {
+  font-size: 20px;
+  color: $bluey;
+  list-style: none;
 }
 
 .Header-container {
@@ -52,7 +66,7 @@
     position: fixed;
     top: 2rem;
     right: 1rem;
-
+    z-index: 100;
     div:first-child {
       transform: rotate(45deg);
     }
@@ -65,6 +79,22 @@
       transform: rotate(-41deg);
     }
   }
+}
+
+.Header-agencias {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Header-agenciasButton {
+  border-radius: 0.5rem;
+  border: 1px solid $bluey;
+  color: $bluey;
+  font-weight: 700;
+  height: 65px;
+  padding: 0.5rem;
+  width: 200px;
 }
 
 
@@ -89,7 +119,7 @@
     width: 1024px;
   }
   .Header-menu {
-    display: flex;
+    flex-direction: row;
     gap: 1rem;
     margin: 0;
     padding: 0;
@@ -98,16 +128,19 @@
   .Header-li {
     color: $bluey;
     list-style: none;
+    font-size: 17px;
   }
   
   .Header-containerMenu {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    opacity: 1;
+    position: absolute;
   }
 
   .Header-agencias {
-    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
     gap: 2rem;
     width: 100%;

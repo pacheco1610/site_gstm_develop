@@ -2,6 +2,9 @@ import React from 'react';
 import Header from '../components/header'
 import imagenHome from '../assets/Image.png'
 import Logo from '../assets/Logo.png'
+import imagen1 from '../assets/imagenslider1.png'
+import imagen2 from '../assets/imagenslider2.png'
+import imagen3 from '../assets/imagenslider3.png'
 
 const home = () => {
   return (
@@ -32,11 +35,54 @@ const home = () => {
               clientes, nuestras tarifas son negociadas directas con el proveedor 
               garantizando siempre la tarifa más baja disponible.
               </span>
-              <div></div>
+            </div>
+            <div className="Home-containerButtons">
+              <div className='Home-buttonSlider'>REGISTRATE!</div>
+              <div className='Home-buttonSlider Home-buttonSliderPlay'>
+                <span class="material-symbols-outlined">
+                  play_arrow
+                </span>
+                <label htmlFor="">PLAY</label>
+              </div>
             </div>
           </div>
           <div className='Home-sliderImagen'>
             <img src={ imagenHome } alt="" />
+          </div>
+        </div>
+      </section>
+      <section className='Home-slider'>
+        <div className="Home-wrapper">
+          <div className="Home-sliderImages">
+            <div className="Home-sliderImagenContainer">
+              <img src={ imagen3 } alt="" />
+              <div>Universal</div>
+            </div>
+            <div className="Home-sliderImagenContainer">
+              <img src={ imagen1 } alt="" />
+              <div>Xcaret</div>
+            </div>
+            <div className="Home-sliderImagenContainer">
+              <img src={ imagen2 } alt="" />
+              <div>Disney</div>
+            </div>
+          </div>
+          <div className="Home-sliderButton"></div>
+        </div>
+      </section>
+      <section className='Home-grupos'>
+        <div className="Home-wrapper Home-wrapperGrupos">
+          <span>Grupos</span>
+          <div className="Home-sliderImages">
+            <div className="Home-grupoImage">
+              <div>Bodas</div>
+            </div>
+            <div className="Home-grupoImage">
+              <div>Escolar</div>
+            </div>
+            <div className="Home-grupoImage">
+              <div>Corporativo</div>
+            </div>
           </div>
         </div>
       </section>
