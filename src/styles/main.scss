@@ -1,6 +1,9 @@
 @import 'utilities/mixins.scss';
 @import 'utilities/variables.scss';
 @import 'utilities/reset.scss';
+@import 'global/global.scss';
 @import 'components/body.scss';
 @import 'components/header.scss';
+@import 'components/headerSecundary.scss';
 @import 'pages/home.scss';
+@import 'pages/about.scss';
