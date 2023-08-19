@@ -1,0 +1,43 @@
+.gallery {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10rem;
+}
+.InfoAbout-media {
+    padding: 0 1.5rem;
+}
+@include breakpoint('medium-high') {
+    .InfoAbout-text {
+       display: flex;
+       margin-bottom: 5rem;
+    }
+    
+.InfoAbout-h4 {
+    font-size: 16px;
+}
+
+.InfoAbout-h5 {
+    font-size: 56px;
+  
+}
+    .InfoAbout-media {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 1024px;
+      padding: 0;
+    }
+    
+    .InfoAbout-video {
+       width: 50%;
+    }
+    .InfoAbout-container {
+        width: 50%;
+    }
+    .InfoAbout-pictures {
+      width: 100%;
+    }
+    
+}

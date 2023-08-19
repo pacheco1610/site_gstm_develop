@@ -1,22 +1,33 @@
-.headerSecundary {
+.HeaderSecundary {
+    width: 100%;
+    height: 300px;
+    padding: 0 1rem ;
+    background-color: #28293E;
+}
+.HeaderSecundary-background {
     width: 100%;
     height: 50vh;
-    background-color: $blue-dark;
+    padding: 0 1rem ;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
-.headerSecundary-container {
+
+.HeaderSecundary-title {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    color: $blanco;
-    text-align: center;
-    h2 {
-        font-size: 50px;
-        margin-bottom: 3rem;
-        font-weight: 700;
-    }
-    h3 {
-        font-size: 22px;
-    }
+    align-items: center;
+    color: #fff;
+    margin-top: 3rem;
+}
+
+.HeaderSecundary-h2 {
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.HeaderSecundary-subtitle {
+    font-size: 16px;
 }
