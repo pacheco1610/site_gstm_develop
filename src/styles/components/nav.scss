@@ -1,0 +1,145 @@
+.Nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 2rem;
+    color: #fff;
+}
+.Nav-logo {
+    width: 220px;
+    img {
+        max-width: 100%;
+    }
+}
+.Nav-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    width: 20px;
+    height: 20px;
+    padding: 1rem;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+.Nav-ul {
+    background-color: #28293E;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    z-index: 99;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Nav-btnClose {
+    width: 100%;
+    text-align: right;
+    font-size: 30px;
+}
+.Nav-li {
+    width: 100%;
+    height: 10%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+.Nav-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #fff;
+}
+.Nav-li-homeIsActive {
+    color: #ffff;
+}
+
+.Nav-li:hover {
+    color: #FF946D;
+}
+
+.Nav-ulIshidden {
+    bottom: -1000px;
+}
+
+@include breakpoint('medium') {
+    .Nav-li {
+        width: 50%;
+    }
+}
+
+@include breakpoint('medium-tablet') {
+    
+    .Nav-icon {
+        display: none;
+    }
+
+    .Nav-ul {
+        background-color: transparent;
+        color: #fff;
+        position: relative;
+        left: 0;
+        bottom: 0px;
+        width: 70%;
+        height: auto;
+        padding: 0px;
+        z-index: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .Nav-li {
+        width:auto;
+        height: auto;
+        font-size: 14px;
+        margin-bottom: 0;
+        margin-top: 0;
+        border-bottom:none;
+        text-align: center;
+    }
+    .Nav-li-homeIsActive {
+        color: #000;
+    }
+    .Nav-btnClose {
+        display: none;
+    }
+    .Nav-ul :nth-child(6) {
+        font-weight: 700;
+    }
+    
+    .Nav-ul :nth-child(7) {
+        border-radius: 4px;
+        padding: 5px;
+        font-weight: 700;
+    }
+    .Nav-fontBlack {
+        color: #000;
+    }
+    .Nav-login {
+        border: 2px solid #fff;
+        padding: 0.2rem;
+    }
+    .Nav-loginBlack {
+        border: 2px solid #000;
+        padding: 0.2rem;
+    }
+}
+
+@include breakpoint('large') {
+    .Nav-ul {
+        width: 50%;
+    }
+}
