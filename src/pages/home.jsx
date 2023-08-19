@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/header'
 import imagenHome from '../assets/Image.png'
 import Logo from '../assets/Logo.png'
 import imagen1 from '../assets/imagenslider1.png'
 import imagen2 from '../assets/imagenslider2.png'
 import imagen3 from '../assets/imagenslider3.png'
+import axios from 'axios'
+import key from '../scripts/apikey'
+import { ComposableMap, Geographies, Geography } from "react-simple-maps"
+const geoUrl =
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/continents/north-america.json"
 
-const home = () => {
+
+
+const Home = () => {
+  const [data, setData] = useState([]); 
+  useEffect(() => {
+    getToken()
+  }, [data]);
+
+ const getToken = async () => {
+  await axios({
+    method: 'POST',
+    headers : {
+      'Authorization':'Bearer ' + key
+    },
+    url: 'https://www.wetravel.com/v1/auth/tokens/access',
+  }).then(response => 
+    queryData(response.data.access_token)
+  );
+ } 
+  const queryData = async (token) => {
+    await axios({
+      method: 'GET',
+      headers : {
+        'Authorization':'Bearer ' + token
+      },
+      url: 'https://www.wetravel.com/v1/draft_trips',
+    }).then(response => console.log(response));
+  }
+
   return (
     <div className='Home'>
       <Header/>
@@ -39,7 +72,7 @@ const home = () => {
             <div className="Home-containerButtons">
               <div className='Home-buttonSlider'>REGISTRATE!</div>
               <div className='Home-buttonSlider Home-buttonSliderPlay'>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                   play_arrow
                 </span>
                 <label htmlFor="">PLAY</label>
@@ -72,22 +105,19 @@ const home = () => {
       </section>
       <section className='Home-grupos'>
         <div className="Home-wrapper Home-wrapperGrupos">
-          <span>Grupos</span>
-          <div className="Home-sliderImages">
-            <div className="Home-grupoImage">
-              <div>Bodas</div>
-            </div>
-            <div className="Home-grupoImage">
-              <div>Escolar</div>
-            </div>
-            <div className="Home-grupoImage">
-              <div>Corporativo</div>
-            </div>
-          </div>
+        <ComposableMap>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography key={geo.rsmKey} geography={geo} />
+              ))
+            }
+          </Geographies>
+        </ComposableMap>
         </div>
       </section>
     </div>
   );
 };
 
-export default home;
+export default Home;
