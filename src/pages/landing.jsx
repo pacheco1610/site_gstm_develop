@@ -9,11 +9,29 @@ import img from '../assets/lasvegas.jpg';
 const Landing = () => {
 
     let { packageId } = useParams();
-    const [info,setData] = useState({})
+    const [trip,setTrip] = useState({})
+    const [description,setDescription] = useState({})
+    const [itineraries,setItineraries] = useState({})
+    const [gallery,setGallery] = useState({})
+    const [inclusiones,setInclusiones] = useState({})
+    const [noInclusiones,setNoInclusiones] = useState({})
+
+    const [token,setToken] = useState(null)
 
     useEffect(() => {
-      getToken();
+        getToken()  
     }, [])
+
+    useEffect(() => {
+      if(!token) return
+      queryTrip(token)
+      queryDescription(token)
+      queryItineraries(token)
+      queryGallery(token)
+      queryInclusiones(token)
+      queryNoInclusiones(token)
+    }, [token])
+    
     
  const getToken = async () => {
     await axios({
@@ -22,8 +40,9 @@ const Landing = () => {
         'Authorization':'Bearer ' + key
       },
       url: 'https://www.wetravel.com/v1/auth/tokens/access',
-    }).then(response => 
-      queryTrip(response.data.access_token)
+    }).then(response => {
+      setToken( response.data.access_token);
+    }
     );
     
    } 
@@ -35,7 +54,7 @@ const Landing = () => {
       },
       url: 'https://www.wetravel.com/v1/draft_trips/09076285',
     }).then(response => 
-      setData({...info, trip: response.data.data})
+      setTrip(response.data.data)
       )
   }
   const queryDescription = async (token) => {
@@ -44,10 +63,12 @@ const Landing = () => {
       headers : {
         'Authorization':'Bearer ' + token
       },
-      url: 'https://www.wetravel.com/v1//draft_trips/09076285/paragraph',
+      url: 'https://www.wetravel.com/v1/draft_trips/09076285/paragraphs',
+      
     }).then(response => 
-      setData({...info, description: response.data.data})
+      setDescription(response.data.data)
       );
+      console.log(description)
   }
   const queryItineraries = async (token) => {
     await axios({
@@ -55,9 +76,9 @@ const Landing = () => {
       headers : {
         'Authorization':'Bearer ' + token
       },
-      url: 'https://www.wetravel.com/v1//draft_trips/09076285/itineraries',
+      url: 'https://www.wetravel.com/v1/draft_trips/09076285/itineraries',
     }).then(response => 
-      setData({...info, itineraries: response.data.data})
+      setItineraries(response.data.data)
       );
 
   }
@@ -67,9 +88,9 @@ const Landing = () => {
       headers : {
         'Authorization':'Bearer ' + token
       },
-      url: 'https://www.wetravel.com/v1//draft_trips/09076285/images',
+      url: 'https://www.wetravel.com/v1/draft_trips/09076285/images',
     }).then(response => 
-      setData({...info, gallery: response.data.data})
+      setGallery(response.data.data)
       );
 
   }
@@ -79,8 +100,8 @@ const Landing = () => {
       headers : {
         'Authorization':'Bearer ' + token
       },
-      url: 'https://www.wetravel.com/v1//draft_trips/09076285/included_items',
-    }).then(response => setData({...info, inclusiones: response.data.data}));
+      url: 'https://www.wetravel.com/v1/draft_trips/09076285/included_items',
+    }).then(response => setInclusiones(response.data.data));
 
   }
   const queryNoInclusiones = async (token) => {
@@ -89,30 +110,38 @@ const Landing = () => {
       headers : {
         'Authorization':'Bearer ' + token
       },
-      url: 'https://www.wetravel.com/v1//draft_trips/09076285/not_included_items',
-    }).then(response => response =>setData({...info, NoInclusiones: response.data.data}));
+      url: 'https://www.wetravel.com/v1/draft_trips/09076285/not_included_items',
+    }).then(response => setNoInclusiones(response.data.data));
 
   }
 
 
   return (
     <div className='landing'>
-      {      console.log(info.trip)}
-        <HeaderSecundary  title="Atardecer en el Gran Cañón" subtitle="Las Vegas, NV, USA" />
+      
+        <HeaderSecundary title={trip?.title && trip?.title} subtitle="Las Vegas, NV, USA" />
         <section className='landing-container'>
             <div className='landing-info'>
                 <div className='landing-seccion'>
                   <span className='landing-span'>Acerca del viaje:</span>
-                  <p>Suba a bordo de un lujoso helicóptero y despegue hacia Grand Canyon West en nuestro tour Sunset Grand Celebration. Su helicóptero estará equipado con asientos lujosos y ventanas panorámicas para disfrutar de vistas espectaculares y opciones de fotografía de la presa Hoover y el lago Mead en ruta hacia su destino. Vuele hacia el salvaje azul allá cuando el piloto comience este recorrido aéreo por el oeste del Gran Cañón y los acantilados rojos cercanos. Vuele sobre el puente Skywalk y pase Eagle Point mientras continúa sobre el cañón.</p>
+                    {description && description.length && description.map ( item =>(
+                      <p key={item.id}>{item?.text.replace("<p>", '')}</p>
+                      )
+                    )}
+                  
                 </div>
                 <div className='landing-seccion'>
                   <span className='landing-span'>Que esta incluido:</span>
                   <div className='landing-inclusiones'>
                     <ul>
-                      <li>
-                        <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i> Vuelo</div>
-                        <p>Helicóptero Aterrizaje en el suelo del cañón champán Vistas del atardecer</p>
+                    {inclusiones && inclusiones.length && inclusiones.map ( item =>(
+                      <li key={item.id}>
+                        <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>{item.title}</div>
+                        <p>{item.description}</p>
                       </li>
+                      )
+                    )       
+                    }
                     </ul>
                   </div>
                 </div>
@@ -120,10 +149,14 @@ const Landing = () => {
                   <span className='landing-span'>No incluido:</span>
                   <div>
                     <ul>
-                      <li>
-                        <div><i class=" landing-red fa-duotone fa-circle-xmark"></i>Cargo Extra</div>
-                        <p>está vigente un recargo temporal por combustible de $30.00 por asiento y se cobra en el momento del check-in.</p>
+                    {noInclusiones && noInclusiones.length && noInclusiones.map ( item =>(
+                      <li key={item.id}>
+                        <div><i class="landing-red fa-duotone fa-circle-xmark"></i>{item.title}</div>
+                        <p>{item.description}</p>
                       </li>
+                      )
+                    )       
+                    }
                     </ul>
                   </div>
                 </div>
@@ -136,12 +169,12 @@ const Landing = () => {
                 <div className='landing-price'>$455</div>
                 <div className='landing-calendar'>
                   <i class="fa-light fa-calendar"></i>
-                  <div className='landing-date'><p>Jul 20</p>-<p>Dec 31</p></div>
+                  <div className='landing-date'><p>{trip?.start_date}</p> a <p>{trip?.end_date}</p></div>
                 </div>
                 <div className='landing-group'>
                   <i class="fa-regular fa-user"></i>
                   <div>Group size:</div>
-                  <div>1-6</div>
+                  <div>{trip?.group_min}-{trip?.group_max}</div>
                 </div>
                 <div className='landing-btn'>Book Now</div>
               </div>
