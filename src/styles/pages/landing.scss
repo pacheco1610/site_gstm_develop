@@ -1,7 +1,126 @@
 .landing {
-
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 .landing-container {
     width: 100%;
+    max-width: 1200px;
     padding: 0 2rem;
+}
+.landing-span {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 5rem;
+}
+.landing-seccion {
+    margin-bottom: 2rem;
+    p {
+        text-align: justify;
+    }
+}
+.landing-green {
+    font-size: 18px;
+    font-weight: 900;
+    color: rgb(5, 165, 15);
+    margin-right: 5px;
+}
+.landing-red {
+    font-size: 18px;
+    font-weight: 900;
+    color: rgb(251, 7, 11);
+    margin-right: 5px;
+}
+.landing-card {
+    width: 100%;
+    border: 1px solid #c2c1c1;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.landing-price {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+.landing-calendar {
+    display: flex;
+    margin-bottom: 0.5rem;
+    i {
+        margin-right: 10px;
+    }
+}
+.landing-date {
+    display: flex;
+}
+.landing-group {
+    display: flex;
+    margin-bottom: 1rem;
+    i {
+        margin-right: 10px;
+    }
+}
+.landing-btn {
+    width: 100%;
+    max-width: 250px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: $bluey-light;
+    cursor: pointer;
+    color: $white;
+    border-radius: 5px;
+}
+.landing-btn:hover {
+    background-color: $bluey;
+}
+.landing-gallery {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.landing-img {
+    margin-bottom: 0.5rem;
+}
+@include breakpoint('medium-high') {
+    .landing-container {
+        width: 100%;
+        padding: 0 2rem;
+        display: flex;
+    }
+    .landing-info {
+        width: 80%;
+        padding: 2rem;
+    }
+    .landing-containerPrice{
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .landing-card {
+        position:sticky;
+    }
+    .landing-gallery {
+        display: flex;
+    }
+    .landing-photoPrincipal {
+        width: 50%;
+    }
+    .landing-photos {
+        width: 50%;
+    }
+    .landing-photo {
+        display: flex;
+    }
+    .landing-img {
+        margin-bottom: 0rem;
+        padding: 0.1rem;
+    }
 }
