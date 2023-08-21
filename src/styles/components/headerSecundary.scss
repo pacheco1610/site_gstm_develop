@@ -10,6 +10,7 @@
     padding: 0 1rem ;
     background-repeat: no-repeat;
     background-size: 100%;
+    margin-bottom: 1rem;
 }
 
 .HeaderSecundary-title {
@@ -21,16 +22,25 @@
     color: $white;
     text-align: center;
     h2 {
-        font-size: 50px;
-        margin-bottom: 3rem;
+        font-size: 20px;
+        margin-bottom: 1rem;
         font-weight: 700;
     }
     h3 {
-        font-size: 22px;
+        font-size: 18px;
     }
 }
 @include breakpoint('medium-high') {
     .HeaderSecundary,.HeaderSecundary-background {
         height: 50vh;
     }
+    
+.HeaderSecundary-title {
+    h2 {
+        font-size: 50px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+}
 }

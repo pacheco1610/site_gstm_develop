@@ -119,7 +119,7 @@ const Landing = () => {
   return (
     <div className='landing'>
       
-        <HeaderSecundary title={trip?.title && trip?.title} subtitle="Las Vegas, NV, USA" />
+        <HeaderSecundary title={trip?.title && trip?.title} subtitle={trip?.destination && trip?.destination} img={itineraries[0]?.photo_url && itineraries[0]?.photo_url } />
         <section className='landing-container'>
             <div className='landing-info'>
                 <div className='landing-seccion'>
@@ -147,7 +147,7 @@ const Landing = () => {
                 </div>
                 <div className='landing-seccion'>
                   <span className='landing-span'>No incluido:</span>
-                  <div>
+                  <div className='landing-inclusiones'>
                     <ul>
                     {noInclusiones && noInclusiones.length && noInclusiones.map ( item =>(
                       <li key={item.id}>
