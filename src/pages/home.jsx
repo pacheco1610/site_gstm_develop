@@ -7,17 +7,60 @@ import imagen2 from '../assets/imagenslider2.png'
 import imagen3 from '../assets/imagenslider3.png'
 import axios from 'axios'
 import key from '../scripts/apikey'
-import { ComposableMap, Geographies, Geography } from "react-simple-maps"
-const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/continents/north-america.json"
-
-
+import { MapContainer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-boundary-canvas";
+import L from "leaflet";
+import continenteMap from '../geojson/continente.geo.json'
+import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import imagenFlag from '../assets/flag.png'
+import icon1 from '../assets/icon1.png'
+import icon2 from '../assets/icon2.png'
+import icon3 from '../assets/icon3.png'
+import travelIcon from '../assets/ustravel.png'
+import clia from '../assets/clia.png'
+import ccra from '../assets/ccra.png'
+import tru from '../assets/tru.png'
+import iita from '../assets/IITA.png'
+import iconSend from '../assets/send.png'
+import remolino from '../assets/remolino.png'
+import estrella2 from '../assets/estrellas2.png'
+import email from '../assets/email.png'
 
 const Home = () => {
   const [data, setData] = useState([]); 
+  const [map, setMap] = useState(null);
+  
   useEffect(() => {
     getToken()
   }, [data]);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const fetchGeoJSON = async () => {
+      const osm = L.TileLayer.boundaryCanvas(
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+        {
+          boundary: continenteMap,
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }
+      );
+      map.addLayer(osm);
+      const ukLayer = L.geoJSON(continenteMap);
+      map.fitBounds(ukLayer.getBounds());
+    };
+    fetchGeoJSON();
+
+    setTimeout(() => {
+      if (map) {
+        map.setZoom(3)
+      }
+    }, 400)
+
+  }, [map]);
 
  const getToken = async () => {
   await axios({
@@ -37,7 +80,21 @@ const Home = () => {
         'Authorization':'Bearer ' + token
       },
       url: 'https://www.wetravel.com/v1/draft_trips',
-    }).then(response => console.log(response));
+    }).then(response => {});
+  }
+
+  const position = [0, 0];
+  const mapStyle = { width: "100%", backgroundColor:'#d5e8eb', height: '60vh', outlineStyle: 'none' };
+
+
+  const handleScroll = (value) => {
+    const element = document.getElementById('sliderCertificados')
+    console.log(element)
+    if (value==='next') {
+      element.scrollLeft += 700
+    } else {
+      element.scrollLeft -= 700
+    }
   }
 
   return (
@@ -105,15 +162,144 @@ const Home = () => {
       </section>
       <section className='Home-grupos'>
         <div className="Home-wrapper Home-wrapperGrupos">
-        <ComposableMap>
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => (
-                <Geography key={geo.rsmKey} geography={geo} />
-              ))
-            }
-          </Geographies>
-        </ComposableMap>
+          <h3 className='Home-titleGrupos'>Destinos</h3>
+          <span>Selecciona un destino</span>
+          <MapContainer
+            center={position}
+            style={mapStyle}
+            zoom={50}
+            ref={setMap}
+            scrollWheelZoom={false}
+            dragging={false}
+            invalidateSize={true}
+            id='map-container'
+          />
+        </div>
+      </section>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-wrapperFlag">
+          <div className='Home-containerTextFlag'>
+            <div className='Home-titleFlag'>
+              <span>Viaja</span>
+              <h4>Con Trotatourism</h4>
+            </div>
+            <div className='Home-containerListFlag'>
+              <div className='Home-containerItemFlag'>
+                <div className='Home-containerIconFlag'>
+                  <img src={ icon1 } alt="" />
+                </div>
+                <div className='Home-containerTextDescFlag'>
+                  <h3>Más de 20 años de experiencia</h3>
+                  <span>Estamos orgullosos de nuestra
+                    experiencia en la industria, así que
+                    podemos guiarte a ti y a tu cliente en la
+                    mejor experiencia de viaje.
+                  </span>
+                </div>
+              </div>
+              <div className='Home-containerItemFlag'>
+                <div className='Home-containerIconFlag'>
+                  <img src={ icon2 } alt="" />
+                </div>
+                <div className='Home-containerTextDescFlag'>
+                  <h3>Make Payment</h3>
+                  <span>Estamos orgullosos de nuestra
+                    experiencia en la industria, así que
+                    podemos guiarte a ti y a tu cliente en la
+                    mejor experiencia de viaje.
+                  </span>
+                </div>
+              </div>
+              <div className='Home-containerItemFlag'>
+                <div className='Home-containerIconFlag'>
+                  <img src={ icon3 } alt="" />
+                </div>
+                <div className='Home-containerTextDescFlag'>
+                  <h3>Reach Airport on Selected Date</h3>
+                  <span>Estamos orgullosos de nuestra
+                    experiencia en la industria, así que
+                    podemos guiarte a ti y a tu cliente en la
+                    mejor experiencia de viaje.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='Home-containerTextImagen'>
+            <img src={ imagenFlag } alt="" />
+          </div>
+        </div>
+      </section>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-wrapperGrupos">
+          <div className='Home-titleFlag'>
+            <h4>Orgullosamente Certificados</h4>
+          </div>
+          <div className='Home-containerCertificate'>
+            <div className='Home-logoTravel'>
+              <img src={ travelIcon } alt="" />
+            </div>
+            <div className='Home-containerSlider'>
+              <div className="Home-sliderCertificados" id='sliderCertificados'>
+                <div className='Home-ContainerCertificados'>
+                  <div>
+                    <img src={ clia } alt="" />
+                  </div>
+                  <div>
+                    <img src={ iita } alt="" />
+                  </div>
+                  <div>
+                    <img src={ ccra } alt="" />
+                  </div>
+                </div>
+                <div className='Home-ContainerCertificados'>
+                  <div>
+                    <img src={ tru } alt="" />
+                  </div>
+                </div>
+              </div>
+              <div className='Home-ContainerCertificadosControles'>
+                <div onClick={() => handleScroll('before')}>
+                  <span className="material-symbols-outlined">
+                    arrow_back_ios
+                  </span>
+                </div>
+                <div onClick={() => handleScroll('next')}>
+                  <span className="material-symbols-outlined">
+                    arrow_forward_ios
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-wrapperGrupos">
+          <div className="Home-containerNewsletter">
+            <div className='Home-titleNewsLetter'>
+              Suscríbete a nuestro Newsletter
+            </div>
+            <div className='Home-inputNewsLetter'>
+              <div className='Home-inputNewsLetterContainer'>
+                <img src={ email } alt="" />
+                <input type="text" placeholder='Your email' />
+              </div>
+              <button>Suscribe</button>
+            </div>
+            <div className='Home-icon'>
+              <img src={ iconSend } alt="" />
+            </div>
+            <div className='Home-remolinoNewslatter'>
+              <img src={ remolino } alt="" />
+            </div>
+            <div className='Home-remolinoNewslatter2'>
+              <img src={ remolino } alt="" />
+            </div>
+            <div className='Home-estrellaNewsLatter'>
+              <img src={ estrella2 } alt="" />
+            </div>
+          </div>
         </div>
       </section>
     </div>
