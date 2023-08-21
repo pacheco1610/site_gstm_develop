@@ -160,9 +160,6 @@ const Landing = () => {
                     </ul>
                   </div>
                 </div>
-                <div className='landing-gallery'>
-
-                </div>
             </div>
             <div className='landing-containerPrice'>
               <div className='landing-card'>
