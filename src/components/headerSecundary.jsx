@@ -1,14 +1,14 @@
 import React from 'react'
 import Nav from './nav'
-import img from '../assets/lasvegas.jpg';
-const HeaderSecundary = ({title,subtitle}) => {
+
+const HeaderSecundary = ({title,subtitle,img}) => {
   return (
 
     <div className={`${img ? "HeaderSecundary-background" : "HeaderSecundary" }`} style={{ backgroundImage: `url(${img})` }}>
       <Nav Fontcolor="#fff"/>
         <div className="HeaderSecundary-title">
           <h2 className='HeaderSecundary-h2'> {title} </h2>        
-          <p className='HeaderSecundary-subtitle'> { subtitle } </p>
+          <h3 className='HeaderSecundary-subtitle'> { subtitle } </h3>
         </div>
     </div>
   )

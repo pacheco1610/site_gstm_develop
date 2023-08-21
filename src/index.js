@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import {
   createBrowserRouter,
   RouterProvider,
+  useParams
 } from "react-router-dom";
 import Home from './pages/home'
 import About from './pages/about';
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     element: <About/>,
   },
   {
-    path: "/landing",
+    path:"/landing",
     element: <Landing/>,
   }
   

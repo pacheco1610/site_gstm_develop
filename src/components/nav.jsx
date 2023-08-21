@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import logo from '../assets/logo-blanco.png';
 
 const Nav = ( {Fontcolor} ) => {
   const [menu,setMenu] = useState(true);
@@ -8,7 +9,7 @@ const Nav = ( {Fontcolor} ) => {
   }
   return (
     <nav className='Nav'>
-        <div className='Nav-logo'><img src="" alt="" /></div>
+        <div className='Nav-logo'><img src={logo} alt="" /></div>
         <div className='Nav-icon' onClick={() => handleMenu()}><i className="fa-solid fa-bars"></i></div>
         <ul className={menu ? ' Nav-ul Nav-ulIshidden ' : 'Nav-ul' }>
             <li className='Nav-btnClose' onClick={() => handleMenu()}>x</li>
