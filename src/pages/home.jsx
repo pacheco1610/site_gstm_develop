@@ -27,6 +27,8 @@ import iconSend from '../assets/send.png'
 import remolino from '../assets/remolino.png'
 import estrella2 from '../assets/estrellas2.png'
 import email from '../assets/email.png'
+import Footer from '../components/footer'
+import modelTrips from '../scripts/modeloTrips'
 
 const Home = () => {
   const [data, setData] = useState([]); 
@@ -80,7 +82,9 @@ const Home = () => {
         'Authorization':'Bearer ' + token
       },
       url: 'https://www.wetravel.com/v1/draft_trips',
-    }).then(response => {});
+    }).then(response => {
+      modelTrips(response.data)
+    });
   }
 
   const position = [0, 0];
@@ -89,7 +93,6 @@ const Home = () => {
 
   const handleScroll = (value) => {
     const element = document.getElementById('sliderCertificados')
-    console.log(element)
     if (value==='next') {
       element.scrollLeft += 700
     } else {
@@ -302,6 +305,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };

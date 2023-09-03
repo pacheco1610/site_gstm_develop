@@ -85,6 +85,8 @@
   font-size: 30px;
   font-weight: 800;
   color: $grey;
+  text-align: center;
+  line-height: 1;
 }
 
 .Home-logoTravel {
@@ -270,6 +272,9 @@
   justify-content: center;
   position: relative;
   flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 1rem;
  }
 
  .Home-icon {
@@ -279,6 +284,60 @@
   width: 40px;
   aspect-ratio: 1/1;
  }
+
+.Home-remolinoNewslatter {
+	display: none;
+}
+
+.Home-remolinoNewslatter2 {
+	display: none;
+}
+
+.Home-estrellaNewsLatter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 80px;
+}
+
+.Home-inputNewsLetter {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .Home-inputNewsLetterContainer {
+    width: 80%;
+    height: 70px;
+    border-radius: 1rem;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      width: 5%;
+    }
+  }
+
+  input {
+    width: 70%;
+    height: 100%;
+  }
+
+  button {
+    width: 80%;
+    height: 70px;
+    background-color: #ff906c;
+    color: $white;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
 
 @include breakpoint('medium') { 
   .Home {
@@ -423,6 +482,7 @@
   }
 
   .Home-remolinoNewslatter {
+    display: flex;
     width: 300px;
     position: absolute;
     right: 0;
@@ -430,6 +490,7 @@
   }
 
   .Home-remolinoNewslatter2 {
+    display: flex;
     width: 300px;
     position: absolute;
     left: 0;
@@ -450,6 +511,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
   
     .Home-inputNewsLetterContainer {
       width: 50%;

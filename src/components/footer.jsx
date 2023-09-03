@@ -16,10 +16,9 @@ const Footer = () => {
             </ul>
           </nav>
         <div className="footer-redes">
-          <span>Siguenos:</span>
           <div>
-          <i class="fa-brands fa-facebook-f"></i>
-          <i class="fa-brands fa-instagram"></i>
+            <i className="fa-brands fa-facebook-f"></i>
+            <i className="fa-brands fa-instagram"></i>
           </div>
         </div>
       </div>
