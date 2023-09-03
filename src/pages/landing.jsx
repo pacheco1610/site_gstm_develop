@@ -5,6 +5,7 @@ import axios from 'axios'
 import key from '../scripts/apikey'
 import Footer from '../components/footer';
 import img from '../assets/lasvegas.jpg';
+import ContainerPrice from '../components/containerPrice';
 
 const Landing = () => {
 
@@ -118,30 +119,70 @@ const Landing = () => {
 
   return (
     <div className='landing'>
-      
         <HeaderSecundary title={trip?.title && trip?.title} subtitle={trip?.destination && trip?.destination} img={itineraries[0]?.photo_url && itineraries[0]?.photo_url } />
         <section className='landing-container'>
+            <div className='landing-about'>
             <div className='landing-info'>
+              <div className='landing-item'>
+                <div className='landing-itemIcon'><i className="fa-light fa-clock"></i></div>
+                <div className='landing-itemInfo'>
+                  <h6>Duracion</h6>
+                  <span>3 dias</span>
+                </div>
+              </div>
+              <div className='landing-item'>
+                <div className='landing-itemIcon'><i className="fa-light fa-user-group"></i></div>
+                <div className='landing-itemInfo'>
+                  <h6>Grupo</h6>
+                  <span>6 personas</span>
+                </div>
+              </div>
+              <div className='landing-item'>
+                <div className='landing-itemIcon'><i className="fa-sharp fa-light fa-earth-americas"></i></div>
+                <div className='landing-itemInfo'>
+                  <h6>Tipo Tour</h6>
+                  <span>Aventura</span>
+                </div>
+              </div>
+              <div className='landing-item'>
+                <div className='landing-itemIcon'><i className="fa-light fa-language"></i></div>
+                <div className='landing-itemInfo'>
+                  <h6>Lenguaje</h6>
+                  <span>Español</span>
+                </div>
+              </div>
+            </div>
                 <div className='landing-seccion'>
                   <span className='landing-span'>Acerca del viaje:</span>
                     {description && description.length && description.map ( item =>(
                       <p key={item.id}>{item?.text.replace("<p>", '')}</p>
                       )
                     )}
-                  
                 </div>
                 <div className='landing-seccion'>
                   <span className='landing-span'>Que esta incluido:</span>
                   <div className='landing-inclusiones'>
-                    <ul>
+                    <ul className='landing-ul'>
                     {inclusiones && inclusiones.length && inclusiones.map ( item =>(
-                      <li key={item.id}>
+                      <li key={item.id} className='landing-li'>
                         <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>{item.title}</div>
                         <p>{item.description}</p>
                       </li>
                       )
                     )       
                     }
+                    <li className='landing-li'>
+                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                    </li>
+                    <li className='landing-li'>
+                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                    </li>
+                    <li className='landing-li'>
+                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                    </li>
                     </ul>
                   </div>
                 </div>
@@ -161,21 +202,7 @@ const Landing = () => {
                   </div>
                 </div>
             </div>
-            <div className='landing-containerPrice'>
-              <div className='landing-card'>
-                <div className='landing-price'>$455</div>
-                <div className='landing-calendar'>
-                  <i class="fa-light fa-calendar"></i>
-                  <div className='landing-date'><p>{trip?.start_date}</p> a <p>{trip?.end_date}</p></div>
-                </div>
-                <div className='landing-group'>
-                  <i class="fa-regular fa-user"></i>
-                  <div>Group size:</div>
-                  <div>{trip?.group_min}-{trip?.group_max}</div>
-                </div>
-                <div className='landing-btn'>Book Now</div>
-              </div>
-            </div>
+            <ContainerPrice/>
         </section>
         <section className='landing-gallery'>
           <div className='landing-photoPrincipal'>

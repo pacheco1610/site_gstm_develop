@@ -1,0 +1,72 @@
+.containerPrice{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.containerPrice-card {
+    width: 100%;
+    border: 1px solid #c2c1c1;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.containerPrice-amount {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    span {
+        font-size: 14px;
+        font-weight: 200;
+    }
+}
+
+.containerPrice-btn {
+    width: 100%;
+    max-width: 250px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: $bluey-light;
+    cursor: pointer;
+    color: $white;
+    border-radius: 5px;
+}
+.containerPrice-btn:hover {
+    background-color: $bluey;
+}
+.containerPrice-group {
+    width: 100%;
+}
+.containerPrice-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
+    border-top: 1px solid #c2c1c1;
+    h4{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    span {
+        font-size: 12px;
+    }
+}
+.containerPrice-controls {
+    display: flex;
+    align-items: center;
+    div {
+        margin: 0 5px;
+    }
+    i {
+        cursor: pointer;
+    }
+}
