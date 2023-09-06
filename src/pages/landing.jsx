@@ -6,6 +6,7 @@ import key from '../scripts/apikey'
 import Footer from '../components/footer';
 import img from '../assets/lasvegas.jpg';
 import ContainerPrice from '../components/containerPrice';
+import Faq from '../components/faq';
 
 const Landing = () => {
 
@@ -121,7 +122,7 @@ const Landing = () => {
     <div className='landing'>
         <HeaderSecundary title={trip?.title && trip?.title} subtitle={trip?.destination && trip?.destination} img={itineraries[0]?.photo_url && itineraries[0]?.photo_url } />
         <section className='landing-container'>
-            <div className='landing-about'>
+          <div className='landing-about'>
             <div className='landing-info'>
               <div className='landing-item'>
                 <div className='landing-itemIcon'><i className="fa-light fa-clock"></i></div>
@@ -165,22 +166,22 @@ const Landing = () => {
                     <ul className='landing-ul'>
                     {inclusiones && inclusiones.length && inclusiones.map ( item =>(
                       <li key={item.id} className='landing-li'>
-                        <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>{item.title}</div>
+                        <div><i class="fa-sharp fa-light fa-circle-check"></i>{item.title}</div>
                         <p>{item.description}</p>
                       </li>
                       )
                     )       
                     }
                     <li className='landing-li'>
-                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
                       <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
                     </li>
                     <li className='landing-li'>
-                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
                       <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
                     </li>
                     <li className='landing-li'>
-                      <div><i class=" landing-green fa-sharp fa-light fa-circle-check"></i>Prueba</div>
+                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
                       <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
                     </li>
                     </ul>
@@ -189,10 +190,10 @@ const Landing = () => {
                 <div className='landing-seccion'>
                   <span className='landing-span'>No incluido:</span>
                   <div className='landing-inclusiones'>
-                    <ul>
+                    <ul className='landing-ul'>
                     {noInclusiones && noInclusiones.length && noInclusiones.map ( item =>(
-                      <li key={item.id}>
-                        <div><i class="landing-red fa-duotone fa-circle-xmark"></i>{item.title}</div>
+                      <li key={item.id} className='landing-li no-include'>
+                        <div><i class="fa-duotone fa-circle-xmark"></i>{item.title}</div>
                         <p>{item.description}</p>
                       </li>
                       )
@@ -201,6 +202,7 @@ const Landing = () => {
                     </ul>
                   </div>
                 </div>
+                <Faq/>
             </div>
             <ContainerPrice/>
         </section>
