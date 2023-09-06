@@ -1,276 +1,81 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/header'
-import imagenHome from '../assets/Image.png'
-import Logo from '../assets/Logo.png'
 import imagen1 from '../assets/imagenslider1.png'
-import imagen2 from '../assets/imagenslider2.png'
-import imagen3 from '../assets/imagenslider3.png'
-import axios from 'axios'
-import key from '../scripts/apikey'
-import { MapContainer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import "leaflet-boundary-canvas";
-import L from "leaflet";
-import continenteMap from '../geojson/continente.geo.json'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-import imagenFlag from '../assets/flag.png'
-import icon1 from '../assets/icon1.png'
-import icon2 from '../assets/icon2.png'
-import icon3 from '../assets/icon3.png'
-import travelIcon from '../assets/ustravel.png'
-import clia from '../assets/clia.png'
-import ccra from '../assets/ccra.png'
-import tru from '../assets/tru.png'
-import iita from '../assets/IITA.png'
-import iconSend from '../assets/send.png'
-import remolino from '../assets/remolino.png'
-import estrella2 from '../assets/estrellas2.png'
-import email from '../assets/email.png'
+import disneyImagen1 from '../assets/imagen1.jpg'
+import disneyImagen2 from '../assets/imagen2.jpg'
+import flye from '../assets/maleta.png'
+import palm from '../assets/palmera.png'
 import Footer from '../components/footer'
-import modelTrips from '../scripts/modeloTrips'
 
 const Home = () => {
   const [data, setData] = useState([]); 
   const [map, setMap] = useState(null);
   
-  useEffect(() => {
-    getToken()
-  }, [data]);
 
-  useEffect(() => {
-    if (!map) return;
+  const handleSelectMenu = ( margin ) => {
+    const component = document.getElementById('selectMenu')
 
-    const fetchGeoJSON = async () => {
-      const osm = L.TileLayer.boundaryCanvas(
-        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-        {
-          boundary: continenteMap,
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
-      map.addLayer(osm);
-      const ukLayer = L.geoJSON(continenteMap);
-      map.fitBounds(ukLayer.getBounds());
-    };
-    fetchGeoJSON();
-
-    setTimeout(() => {
-      if (map) {
-        map.setZoom(3)
-      }
-    }, 400)
-
-  }, [map]);
-
- const getToken = async () => {
-  await axios({
-    method: 'POST',
-    headers : {
-      'Authorization':'Bearer ' + key
-    },
-    url: 'https://www.wetravel.com/v1/auth/tokens/access',
-  }).then(response => 
-    queryData(response.data.access_token)
-  );
- } 
-  const queryData = async (token) => {
-    await axios({
-      method: 'GET',
-      headers : {
-        'Authorization':'Bearer ' + token
-      },
-      url: 'https://www.wetravel.com/v1/draft_trips',
-    }).then(response => {
-      modelTrips(response.data)
-    });
+    component.style.left = margin
   }
 
-  const position = [0, 0];
-  const mapStyle = { width: "100%", backgroundColor:'#d5e8eb', height: '60vh', outlineStyle: 'none' };
+  const handleClick = (type) => {
+    const slider = document.querySelector('.Home-sliderCarousel');
+    const firsElement = document.querySelectorAll('.Home-sliderDescubreContainer')[0];
+    const firstElementWidth = firsElement.clientWidth;
+    slider.scrollLeft += type === "left" ? -firstElementWidth : firstElementWidth;
+  }
 
-
-  const handleScroll = (value) => {
-    const element = document.getElementById('sliderCertificados')
-    if (value==='next') {
-      element.scrollLeft += 700
-    } else {
-      element.scrollLeft -= 700
-    }
+  const handleClickDeals = (type) => {
+    const slider = document.querySelector('.Home-sliderCarouselDeals');
+    const firsElement = document.querySelectorAll('.Home-sliderDealsContainer')[0];
+    const firstElementWidth = firsElement.clientWidth;
+    slider.scrollLeft += type === "left" ? -firstElementWidth : firstElementWidth;
   }
 
   return (
     <div className='Home'>
-      <Header/>
-      <section className='Home-section'>
+      <section className='Home-section Home-background'>
         <div className="Home-wrapper">
-          <div className='Home-sliderText'>
-            <div className='Home-logo'>
-              <img src={ Logo } alt="" />
-            </div>
-            <div className='Home-subtitle'>
-              <span>TOUR OPERADOR MAYORISTA</span>
-            </div>
-            <div className='Home-title'>
-              <h3>
-              Somos un receptivo basados en 
-            Las Vegas expertos en Nevada, 
-            pero con producto disponible con 
-            las mejores tarifas para tu agencia 
-            en todo Estado Unidos.
-              </h3>
-            </div>
-            <div className='Home-descripcion'>
-              <span>
-              Trota Tourism tiene staff disponible en español todo el 
-              tiempo para las agencias y asistencia personalizada para los 
-              clientes, nuestras tarifas son negociadas directas con el proveedor 
-              garantizando siempre la tarifa más baja disponible.
-              </span>
-            </div>
-            <div className="Home-containerButtons">
-              <div className='Home-buttonSlider'>REGISTRATE!</div>
-              <div className='Home-buttonSlider Home-buttonSliderPlay'>
-                <span className="material-symbols-outlined">
-                  play_arrow
-                </span>
-                <label htmlFor="">PLAY</label>
+          <div className="Home-containerTitle">
+            <h1>Encuentra las mejores tarifas con nosotros</h1>
+            <span>Nuestras tarifas son negociadas directas con el provedor garantizando la tarifa mas baja disponible</span>
+            <button>Explore Now</button>
+          </div>
+          <div className="Home-containerSearch">
+            <div className="Home-SearchWrapper">
+              <div className="Home-SearchHeader">
+                <div onClick={() => handleSelectMenu('0%')}>Atracciones</div>
+                <div onClick={() => handleSelectMenu('25%')}>Tours</div>
+                <div onClick={() => handleSelectMenu('50%')}>Transporte</div>
+                <div onClick={() => handleSelectMenu('75%')}>Hoteles</div>
+                <div className='Home-SearchHeaderSelect' id='selectMenu'></div>
               </div>
-            </div>
-          </div>
-          <div className='Home-sliderImagen'>
-            <img src={ imagenHome } alt="" />
-          </div>
-        </div>
-      </section>
-      <section className='Home-slider'>
-        <div className="Home-wrapper">
-          <div className="Home-sliderImages">
-            <div className="Home-sliderImagenContainer">
-              <img src={ imagen3 } alt="" />
-              <div>Universal</div>
-            </div>
-            <div className="Home-sliderImagenContainer">
-              <img src={ imagen1 } alt="" />
-              <div>Xcaret</div>
-            </div>
-            <div className="Home-sliderImagenContainer">
-              <img src={ imagen2 } alt="" />
-              <div>Disney</div>
-            </div>
-          </div>
-          <div className="Home-sliderButton"></div>
-        </div>
-      </section>
-      <section className='Home-grupos'>
-        <div className="Home-wrapper Home-wrapperGrupos">
-          <h3 className='Home-titleGrupos'>Destinos</h3>
-          <span>Selecciona un destino</span>
-          <MapContainer
-            center={position}
-            style={mapStyle}
-            zoom={50}
-            ref={setMap}
-            scrollWheelZoom={false}
-            dragging={false}
-            invalidateSize={true}
-            id='map-container'
-          />
-        </div>
-      </section>
-      <section className='Home-section'>
-        <div className="Home-wrapper Home-wrapperFlag">
-          <div className='Home-containerTextFlag'>
-            <div className='Home-titleFlag'>
-              <span>Viaja</span>
-              <h4>Con Trotatourism</h4>
-            </div>
-            <div className='Home-containerListFlag'>
-              <div className='Home-containerItemFlag'>
-                <div className='Home-containerIconFlag'>
-                  <img src={ icon1 } alt="" />
-                </div>
-                <div className='Home-containerTextDescFlag'>
-                  <h3>Más de 20 años de experiencia</h3>
-                  <span>Estamos orgullosos de nuestra
-                    experiencia en la industria, así que
-                    podemos guiarte a ti y a tu cliente en la
-                    mejor experiencia de viaje.
-                  </span>
-                </div>
-              </div>
-              <div className='Home-containerItemFlag'>
-                <div className='Home-containerIconFlag'>
-                  <img src={ icon2 } alt="" />
-                </div>
-                <div className='Home-containerTextDescFlag'>
-                  <h3>Make Payment</h3>
-                  <span>Estamos orgullosos de nuestra
-                    experiencia en la industria, así que
-                    podemos guiarte a ti y a tu cliente en la
-                    mejor experiencia de viaje.
-                  </span>
-                </div>
-              </div>
-              <div className='Home-containerItemFlag'>
-                <div className='Home-containerIconFlag'>
-                  <img src={ icon3 } alt="" />
-                </div>
-                <div className='Home-containerTextDescFlag'>
-                  <h3>Reach Airport on Selected Date</h3>
-                  <span>Estamos orgullosos de nuestra
-                    experiencia en la industria, así que
-                    podemos guiarte a ti y a tu cliente en la
-                    mejor experiencia de viaje.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='Home-containerTextImagen'>
-            <img src={ imagenFlag } alt="" />
-          </div>
-        </div>
-      </section>
-      <section className='Home-section'>
-        <div className="Home-wrapper Home-wrapperGrupos">
-          <div className='Home-titleFlag'>
-            <h4>Orgullosamente Certificados</h4>
-          </div>
-          <div className='Home-containerCertificate'>
-            <div className='Home-logoTravel'>
-              <img src={ travelIcon } alt="" />
-            </div>
-            <div className='Home-containerSlider'>
-              <div className="Home-sliderCertificados" id='sliderCertificados'>
-                <div className='Home-ContainerCertificados'>
-                  <div>
-                    <img src={ clia } alt="" />
-                  </div>
-                  <div>
-                    <img src={ iita } alt="" />
-                  </div>
-                  <div>
-                    <img src={ ccra } alt="" />
+              <div className="Home-SearchBody">
+                <div className='Home-SearchInputContainer'>
+                  <i className="fa-light fa-location-dot"></i>
+                  <div className='Home-SearchInput'>
+                    <label htmlFor="">Locación</label>
+                    <input type="text" placeholder='¿A dónde vas?' onLoad={() => console.log('prueba')} />
                   </div>
                 </div>
-                <div className='Home-ContainerCertificados'>
-                  <div>
-                    <img src={ tru } alt="" />
+                <div className='Home-SearchInputContainer'>
+                  <i className="fa-light fa-calendar"></i>
+                  <div className='Home-SearchInput'>
+                    <label htmlFor="">Fecha</label>
+                    <input type="text" placeholder='¿Cuando?' />
                   </div>
                 </div>
-              </div>
-              <div className='Home-ContainerCertificadosControles'>
-                <div onClick={() => handleScroll('before')}>
-                  <span className="material-symbols-outlined">
-                    arrow_back_ios
-                  </span>
+                <div className='Home-SearchInputContainer'>
+                  <i className="fa-light fa-user-vneck"></i>
+                  <div className='Home-SearchInput'>
+                    <label htmlFor="">Personas</label>
+                    <input type="text" placeholder='¿Cuantos van?' />
+                  </div>
                 </div>
-                <div onClick={() => handleScroll('next')}>
-                  <span className="material-symbols-outlined">
-                    arrow_forward_ios
-                  </span>
+                <div className='Home-SearchInputContainer'>
+                  <button>
+                      <span>Buscar</span>
+                     <i className="fa-light fa-magnifying-glass"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -278,34 +83,375 @@ const Home = () => {
         </div>
       </section>
       <section className='Home-section'>
-        <div className="Home-wrapper Home-wrapperGrupos">
-          <div className="Home-containerNewsletter">
-            <div className='Home-titleNewsLetter'>
-              Suscríbete a nuestro Newsletter
-            </div>
-            <div className='Home-inputNewsLetter'>
-              <div className='Home-inputNewsLetterContainer'>
-                <img src={ email } alt="" />
-                <input type="text" placeholder='Your email' />
+        <div className="Home-wrapper Home-wrapperDescubre">
+          <h1>Descubre nuestros destinos</h1>
+          <div className='Home-sliderDescubre'>
+            <div className="Home-sliderCarousel">
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
               </div>
-              <button>Suscribe</button>
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDescubreContainer'>
+                <img src={ imagen1 } alt="" />
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
             </div>
-            <div className='Home-icon'>
-              <img src={ iconSend } alt="" />
-            </div>
-            <div className='Home-remolinoNewslatter'>
-              <img src={ remolino } alt="" />
-            </div>
-            <div className='Home-remolinoNewslatter2'>
-              <img src={ remolino } alt="" />
-            </div>
-            <div className='Home-estrellaNewsLatter'>
-              <img src={ estrella2 } alt="" />
+            <div className="Home-DescubreCarouselControllers">
+              <div onClick={() => handleClick('left')}><i className="fa-sharp fa-light fa-chevron-left"></i></div>
+              <div onClick={() => handleClick('right')}><i className="fa-sharp fa-light fa-chevron-right"></i></div>
             </div>
           </div>
         </div>
       </section>
-      <Footer/>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-wrapperBeneficios">
+          <h1 className='Home-titleGrupos'>Vea algunos beneficios de unirse a nosotros</h1>
+          <div className='Home-beneficiosWrapper'>
+            <div className='Home-beneficiosContainer'>
+              <div className='Home-beneficio'>
+                <div className="Home-beneficioIcon">
+                  <span>1</span>
+                </div>
+                <div className="Home-beneficioText">
+                  <h1>Más de 20 años de experiencia</h1>
+                  <span>Estamos orgullosos de nuestra experiencia en la industria, asi que podemos guiarte a ti y tu cliente en la mejor experiencia de viaje.</span>
+                </div>
+              </div>
+              <div className='Home-beneficio'>
+                <div className="Home-beneficioIcon">
+                  <span>2</span>
+                </div>
+                <div className="Home-beneficioText">
+                  <h1>Ofertas y descuentos exclusivos</h1>
+                  <span>Contamos asociaciones con Atracciones, Tours ,Hoteles y otros proveedores de viajes.</span>
+                </div>
+              </div>
+              <div className='Home-beneficio'>
+                <div className="Home-beneficioIcon">
+                  <span>3</span>
+                </div>
+                <div className="Home-beneficioText">
+                  <h1>Tranquilidad y soporte</h1>
+                  <span>Brindamos tranquilidad al ofrecer apoyo y asistencia en todo momento.</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-beneficioImagenWrapper'>
+              <div className="Home-beneficioImagenContainer">
+                <img src={ disneyImagen1 } alt="" />
+                <img src={ disneyImagen2 } alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-DestinationWrapper">
+          <div className='Home-destinationsHeader'>
+            <div>
+              <h1>Explora nuestros destinos</h1>
+              <span>Vamos a una aventura</span>
+            </div>
+            <div className='Home-destinationButtons'>
+              <div>
+                <button>Atracciones</button>
+              </div>
+              <div>
+                <button>Tours</button>
+              </div>
+              <div>
+                <button>Transporte</button>
+              </div>
+              <div>
+                <button>Hoteles</button>
+              </div>
+            </div>
+          </div>
+          <div className='Home-destinationsBody'>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+            <div className='Home-destinationContainer'>
+              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+
+              </div>
+              <div className='Home-destinationBody'>
+                <div>
+                  <h1>The beverly hills Hotel</h1>
+                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                </div>
+                <div>
+                  <h1>$125</h1><span>/per night</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='Home-section Home-sectionWork'>
+        <div className="Home-wrapper Home-ItWork">
+          <div className='Home-ItWorkHeader'>
+            <h1>Como funciona</h1>
+            <span>keep calm & travel on</span>
+          </div>
+          <div className='Home-ItWorkBody'>
+            <div className="Home-ItWorkTarget">
+              <div><i className="fa-duotone fa-calendar-days"></i></div>
+              <div>
+                <h1>Reserva y Relajate</h1>
+                <span>Durante todo el viaje del cliente, la agencia de viajes le brindará apoyo.</span>
+              </div>
+            </div>
+            <div className="Home-ItWorkTarget">
+              <div><i className="fa-duotone fa-wallet"></i></div>
+              <div>
+                <h1>Pagos y Tarifas</h1>
+                <span>Durante todo el viaje del cliente, la agencia de viajes le brindará apoyo.</span>
+              </div>
+            </div>
+            <div className="Home-ItWorkTarget">
+              <div><i className="fa-duotone fa-headset"></i></div>
+              <div>
+                <h1>Atención al cliente</h1>
+                <span>Durante todo el viaje del cliente, la agencia de viajes le brindará apoyo.</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      <section className='Home-section'>
+        <div className="Home-wrapper Home-TopDeals">
+          <div className='Home-TopDealsHeader'>
+            <div className='Home-TopDealsTitle'>
+              <h1>Las mejores ofertas de hoy</h1>
+              <span>Vamos a una aventura</span>
+            </div>
+            <div className='Home-TopDealsButtons'>
+              <div onClick={() => handleClickDeals('left')}>
+                <i className="fa-sharp fa-light fa-chevron-left"></i>
+              </div>
+              <div onClick={() => handleClickDeals('right')}>
+                <i className="fa-sharp fa-light fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+          <div>
+          <div className='Home-sliderDeals'>
+            <div className="Home-sliderCarouselDeals">
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+              <div className='Home-sliderDealsContainer'>
+                <div>
+                  <img src={ imagen1 } alt="" />
+                </div>
+                <div>
+                  <h3>New York City</h3>
+                  <span>150, 450 travellers</span>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='Home-section Home-sectionWork'>
+        <div className="Home-wrapper Home-TopDeals">
+        <div className='Home-TopDealsHeader'>
+          <div className='Home-TopDealsTitle Home-TitleTestimonios'>
+            <h1>Testimonios</h1>
+            <span>Que dicen de nosotros</span>
+          </div>
+          <div className='Home-TopDealsButtons Home-TitleTestimoniosButton'>
+            <div onClick={() => handleClickDeals('left')}>
+              <i className="fa-sharp fa-light fa-chevron-left"></i>
+            </div>
+            <div onClick={() => handleClickDeals('right')}>
+              <i className="fa-sharp fa-light fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+        <div className='Home-sliderDeals'>
+          <div className="Home-sliderCarouselTestimonials">
+            <div className='Home-sliderTestimonialsContainer'>
+              <div className='Home-sliderTestimonailsWrapper'>
+                <div>
+                  <div className='Home-sliderTestimonailsIcon'>😊</div>
+                </div>
+                <div>
+                  <span>
+                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+      <section className='Home-section Home-NewsLatter'>
+        <div className="Home-wrapper Home-NewsLatterContainer">
+          <div className='Home-NewsLatterHeader' >
+            <h1>Your Travel Journey Starts Here</h1>
+            <span>Subscribe to see secret deals prices drop moment you sign up!</span>
+          </div>
+          <div className='Home-NewsLatterBody'>
+            <input type="text" placeholder='Enter you email address'/>
+            <button>Subscribe</button>
+          </div>
+          <div className='Home-NewsLatterFlye'>
+            <img src={ flye } alt="" />
+          </div>
+          <div className='Home-NewsLatterPalm'>
+            <img src={ palm } alt="" />
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
   );
 };
