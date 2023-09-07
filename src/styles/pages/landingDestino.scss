@@ -1,0 +1,159 @@
+.Destino-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.Destino-sideBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $bluey-text;
+  }
+
+  ul {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  li {
+    font-size: 14px;
+    display: flex;
+    color: $bluey-text;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
+
+.Destino-tours {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $bluey-text;
+  }
+}
+
+.Destino-toursHeader {
+  display: flex;
+  gap: 0.5rem;
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.Destinos-toursWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Destinos-tourContainer {
+  aspect-ratio: 3/1;
+  width: 100%;
+  border: 1px solid $grey-light;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+
+  img {
+    border-radius: 1rem;
+    object-fit: cover;
+    width: 30%;
+  }
+}
+
+.Destinos-tourContainerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 70%;
+  gap: 1rem;
+}
+
+.Destinos-tourContainerText-footer {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+  }
+}
+
+.Destinos-tourContainerText-per {
+  color: $grey-text;
+}
+
+.Destinos-tourContainerText-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  i {
+    color: $bluey-button;
+  }
+
+  span {
+    color: $grey-text;
+  }
+}
+
+.Destinos-tourContainerText-header {
+  span {
+    color: $blue-text;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: $yellow-light;
+    font-weight: 700;
+    font-size: 12px;
+  }
+}
+
+.Destino-price {
+  input {
+    width: 100%;
+  }
+}
+
+@include breakpoint('medium') {  
+  .Destino-wrapper {
+    padding: 100px 1rem;
+    flex-direction: row;
+    gap: 3rem;
+  }
+  
+  .Destino-sideBar {
+    width: 25%;
+  }
+  
+  .Destino-tours {
+    width: 75%;
+  }
+}

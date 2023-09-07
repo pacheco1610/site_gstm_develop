@@ -5,18 +5,22 @@ align-items: center;
 }
 .landing-container {
     width: 100%;
-    max-width: 1200px;
-    padding: 0 2rem;
+    max-width: 1024px;
+    padding: 0 1rem;
 }
 .landing-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem 0;
 }
+
 .landing-item {
-    display: flex;
+  display: flex;
+  padding: 0.5rem 0;
+  width: calc(100%/2);
 }
+
 .landing-itemIcon {
     width: 35px;
     height: 35px;
@@ -58,8 +62,8 @@ align-items: center;
 .landing-li {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    aspect-ratio: 1/1;
     border-radius: 10px;
     background-color: rgb(238, 193, 249);
     div {
@@ -99,44 +103,70 @@ align-items: center;
 }
 
 .landing-gallery {
-    width: 100%;
-    max-width: 1200px;
+  width: 100%;
+  max-width: 1024px;
+  padding: 0 1rem;
 }
 
 .landing-img {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  
+  img {
+    border-radius: 1rem;
+  }
 }
-@include breakpoint('medium-high') {
-    .landing-container {
-        width: 100%;
-        padding: 0 2rem;
-        display: flex;
-    }
-    .landing-about {
-        width: 70%;
-        padding: 2rem;
-    }
-    .landing-info {
-        gap:0;
-        justify-content:space-evenly;
-    }
-    .landing-card {
-        position:sticky;
-    }
-    .landing-gallery {
-        display: flex;
-    }
-    .landing-photoPrincipal {
-        width: 50%;
-    }
-    .landing-photos {
-        width: 50%;
-    }
-    .landing-photo {
-        display: flex;
-    }
-    .landing-img {
-        margin-bottom: 0rem;
-        padding: 0.1rem;
-    }
+@include breakpoint('medium') {
+
+  .landing-container {
+    width: 100%;
+    display: flex;
+    gap: 4rem;
+  }
+
+  .landing-about {
+    width: 70%;
+  }
+
+  .landing-info {
+    gap:0;
+  }
+
+  .landing-card {
+    position:sticky;
+  }
+
+  .landing-gallery {
+    display: flex;
+  }
+
+  .landing-photoPrincipal {
+    width: 50%;
+  }
+
+  .landing-photos {
+    width: 50%;
+  }
+
+  .landing-photo {
+    display: flex;
+  }
+
+  .landing-img {
+    margin-bottom: 0rem;
+    padding: 0.1rem;
+  }
+
+  .landing-li {
+    width: calc(95%/2);
+  }
+
+  .landing-item {
+    width: calc(100%/3);
+  }
+}
+
+@include breakpoint('medium-high') { 
+  .landing-li {
+    width: calc(95%/3);
+  }
 }

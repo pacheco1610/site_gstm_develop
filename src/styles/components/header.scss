@@ -1,4 +1,11 @@
+.Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $blue-menuBackground;
+}
 .Header-containerMenu {
+  display: flex;
   position: fixed;
   opacity: 0;
   gap: 2rem;
@@ -29,8 +36,9 @@
 }
 
 .Header-li {
+  color: $blue-text;
+  cursor: pointer;
   font-size: 20px;
-  color: $bluey;
   list-style: none;
 }
 
@@ -39,11 +47,13 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem 1rem;
-  height: 100px;
+  height: 80px;
+  width: 100%;
+  align-items: center;
 }
 
 .Header-logo {
-  width: 250px;
+  width: 200px;
 }
 
 .Header-menuMobile {
@@ -52,6 +62,7 @@
   width: 2rem;
   aspect-ratio: 1/1;
   gap: 0.5rem;
+  z-index: 100;
 
   div {
     background-color: #000;
@@ -97,66 +108,62 @@
   width: 200px;
 }
 
-
-@include breakpoint('medium') {
-
+.Header-Login {
+  display: none;
+  span {
+    color: $white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    background-color: $bluey-button;
+    font-size: 15px;
+  }
 }
 
-@include breakpoint('medium-high') {
-  .Header {
-    display: block;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+@include breakpoint('medium') {
   .Header-container {
     display: flex;
-    justify-content: flex-end;
-    padding: 2rem 1rem;
-    height: 200px;
-    width: 1024px;
+    height: 80px;
+    max-width: 1024px;
+    align-items: center;
   }
+
   .Header-menu {
     flex-direction: row;
-    gap: 1rem;
+    gap: 3rem;
     margin: 0;
     padding: 0;
   }
 
+  .Header-logo {
+    width: 30%;
+
+    img {
+      width: 60%;
+    }
+  }
+  
+  .Header-Login {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+  }
+
   .Header-li {
-    color: $bluey;
     list-style: none;
-    font-size: 17px;
+    font-size: 15px;
   }
   
   .Header-containerMenu {
     display: flex;
-    flex-direction: column;
     gap: 1.5rem;
     opacity: 1;
-    position: absolute;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 40%;
   }
 
-  .Header-agencias {
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 2rem;
-    width: 100%;
-  }
-
-  .Header-agenciasButton {
-    border-radius: 0.5rem;
-    border: 1px solid $bluey;
-    color: $bluey;
-    font-weight: 700;
-    height: 65px;
-    padding: 0.5rem;
-    width: 150px;
-  }
-
-  .Header-logo, .Header-menuMobile {
+  .Header-menuMobile {
     display: none;
   }
 }

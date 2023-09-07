@@ -5,11 +5,20 @@ import disneyImagen2 from '../assets/imagen2.jpg'
 import flye from '../assets/maleta.png'
 import palm from '../assets/palmera.png'
 import Footer from '../components/footer'
+import Header from '../components/header'
+import axios from 'axios'
+import modelDestino from '../scripts/modelDestinos';
 
 const Home = () => {
-  const [data, setData] = useState([]); 
-  const [map, setMap] = useState(null);
+  const [dataDestinos, setDataDestinos] = useState(false)
   
+  useEffect(() => {
+    axios.get('https://cms.trotatourism.com/api/servicios')
+    .then(response => {
+        const data = new modelDestino(response.data)
+        setDataDestinos(data)
+    })
+  }, []);
 
   const handleSelectMenu = ( margin ) => {
     const component = document.getElementById('selectMenu')
@@ -31,8 +40,16 @@ const Home = () => {
     slider.scrollLeft += type === "left" ? -firstElementWidth : firstElementWidth;
   }
 
+  const handleClickTestimonails = (type) => {
+    const slider = document.querySelector('.Home-sliderCarouselTestimonials');
+    const firsElement = document.querySelectorAll('.Home-sliderTestimonialsContainer')[0];
+    const firstElementWidth = firsElement.clientWidth;
+    slider.scrollLeft += type === "left" ? -firstElementWidth : firstElementWidth;
+  }
+
   return (
     <div className='Home'>
+      <Header/>
       <section className='Home-section Home-background'>
         <div className="Home-wrapper">
           <div className="Home-containerTitle">
@@ -87,48 +104,17 @@ const Home = () => {
           <h1>Descubre nuestros destinos</h1>
           <div className='Home-sliderDescubre'>
             <div className="Home-sliderCarousel">
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
-              <div className='Home-sliderDescubreContainer'>
-                <img src={ imagen1 } alt="" />
-                <div>
-                  <h3>New York City</h3>
-                  <span>150, 450 travellers</span>
-                </div>
-              </div>
+              {(dataDestinos && dataDestinos.length > 0) && dataDestinos.map(item => {
+                return (
+                  <div className='Home-sliderDescubreContainer'>
+                    <img src={item.details?.photos[0]?.url} alt="" />
+                    <div>
+                      <h3>{ item.locality }</h3>
+                      <span>{ item.numberTrips } Aventuras</span>
+                    </div>
+                  </div>
+                  )
+              })}
             </div>
             <div className="Home-DescubreCarouselControllers">
               <div onClick={() => handleClick('left')}><i className="fa-sharp fa-light fa-chevron-left"></i></div>
@@ -342,6 +328,9 @@ const Home = () => {
             <div className="Home-sliderCarouselDeals">
               <div className='Home-sliderDealsContainer'>
                 <div>
+                  <div className="Home-sliderDealsDiscount">
+                    20% OFF
+                  </div>
                   <img src={ imagen1 } alt="" />
                 </div>
                 <div>
@@ -407,10 +396,10 @@ const Home = () => {
             <span>Que dicen de nosotros</span>
           </div>
           <div className='Home-TopDealsButtons Home-TitleTestimoniosButton'>
-            <div onClick={() => handleClickDeals('left')}>
+            <div onClick={() => handleClickTestimonails('left')}>
               <i className="fa-sharp fa-light fa-chevron-left"></i>
             </div>
-            <div onClick={() => handleClickDeals('right')}>
+            <div onClick={() => handleClickTestimonails('right')}>
               <i className="fa-sharp fa-light fa-chevron-right"></i>
             </div>
           </div>
@@ -426,6 +415,69 @@ const Home = () => {
                   <span>
                     "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
                   </span>
+                </div>
+                <div>
+                  <h1>Esther Howard</h1>
+                </div>
+              </div>
+            </div>
+            <div className='Home-sliderTestimonialsContainer'>
+              <div className='Home-sliderTestimonailsWrapper'>
+                <div>
+                  <div className='Home-sliderTestimonailsIcon'>😊</div>
+                </div>
+                <div>
+                  <span>
+                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                  </span>
+                </div>
+                <div>
+                  <h1>Esther Howard</h1>
+                </div>
+              </div>
+            </div>
+            <div className='Home-sliderTestimonialsContainer'>
+              <div className='Home-sliderTestimonailsWrapper'>
+                <div>
+                  <div className='Home-sliderTestimonailsIcon'>😊</div>
+                </div>
+                <div>
+                  <span>
+                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                  </span>
+                </div>
+                <div>
+                  <h1>Esther Howard</h1>
+                </div>
+              </div>
+            </div>
+            <div className='Home-sliderTestimonialsContainer'>
+              <div className='Home-sliderTestimonailsWrapper'>
+                <div>
+                  <div className='Home-sliderTestimonailsIcon'>😊</div>
+                </div>
+                <div>
+                  <span>
+                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                  </span>
+                </div>
+                <div>
+                  <h1>Esther Howard</h1>
+                </div>
+              </div>
+            </div>
+            <div className='Home-sliderTestimonialsContainer'>
+              <div className='Home-sliderTestimonailsWrapper'>
+                <div>
+                  <div className='Home-sliderTestimonailsIcon'>😊</div>
+                </div>
+                <div>
+                  <span>
+                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                  </span>
+                </div>
+                <div>
+                  <h1>Esther Howard</h1>
                 </div>
               </div>
             </div>

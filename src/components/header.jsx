@@ -18,27 +18,19 @@ const Header = () => {
   return (
     <nav className='Header'>
       <div className="Header-container">
+        <div className="Header-logo">
+            <img src={ logo } alt="" />
+        </div>
         <div className={ classMenu }>
-          <div className='Header-agencias'>
-            <button className='Header-agenciasButton'>
-              Registra tu Agencia
-            </button>
-            <button className='Header-agenciasButton'>
-              Ya estoy Registrado
-            </button>
-          </div>
           <ul className='Header-menu'>
-            <li className='Header-li'>Destinios</li>
-            <li className='Header-li'>Paquetes</li>
-            <li className='Header-li'>Hoteles</li>
-            <li className='Header-li'>Rentas</li>
-            <li className='Header-li'>Transportación</li>
-            <li className='Header-li'>Atracciones</li>
-            <li className='Header-li'>Circuitos</li>
+            <li className='Header-li'>Inicio</li>
+            <li className='Header-li'>Destinos</li>
+            <li className='Header-li'>Servicios</li>
+            <li className='Header-li'>Contacto</li>
           </ul>
         </div>
-        <div className="Header-logo">
-          <img src={ logo } alt="" />
+        <div className='Header-Login'>
+          <span>Iniciar Sesion</span>
         </div>
         <div className={ buttonClose } onClick={ () => setActiveMenu(!activeMenu) }>
           <div></div>

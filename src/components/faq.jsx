@@ -11,7 +11,6 @@ const Faq = () => {
     <section className="Faq">
     <div className="Faq-main">
           <div className="Faq-title">
-            <div className="Faq-h3">FAQ</div>
             <div className="Faq-h4">Frequently Asked Faq</div>
           </div>
           <div className="Faq-acordeon">

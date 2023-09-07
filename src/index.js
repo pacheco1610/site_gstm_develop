@@ -12,6 +12,7 @@ import {
 import Home from './pages/home'
 import About from './pages/about';
 import Landing from './pages/landing';
+import Destino from './pages/landingDestino'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path:"/landing",
     element: <Landing/>,
+  },
+  {
+    path:"/destinos",
+    element: <Destino/>
   }
   
 ]);

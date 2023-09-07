@@ -58,7 +58,7 @@
 .Home-background {
   align-items: center;
   background-color: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/home-slider.jpg");;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/home-slider.jpg");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -225,15 +225,16 @@
 }
 
 .Home-sliderDescubreContainer {
+  align-items: center;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 1rem;
+  min-height: 50px;
   min-width: 100%;
   object-fit: cover;
-  min-height: 50px;
-  gap: 1rem;
   padding: 1rem;
-  align-items: center;
+  width: 100%;
 
   img {
     width: 60%;
@@ -651,11 +652,12 @@
 .Home-sliderDealsContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 1rem;
+  min-height: 50px;
   min-width: 100%;
   object-fit: cover;
-  min-height: 50px;
-  gap: 1rem;
+  position: relative;
+  width: 100%;
 
   div:first-child {
     width: 100%;
@@ -708,6 +710,12 @@
   span {
     color: $grey-text;
     font-size: 14px;
+  }
+
+  h1 {
+    color: $grey-text;
+    font-style: italic;
+    font-weight: 700;
   }
 }
 
@@ -794,6 +802,20 @@
   display: none;
 }
 
+.Home-sliderDealsDiscount {
+  top: 5%;
+  left: 5%;
+  position: absolute;
+  font-size: 12px;
+  width: 70px !important;
+  height: 30px !important;
+  background-color: #ffffffd2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
 @include breakpoint('medium') { 
   .Home-DescubreCarouselControllers {
     width: 100%;
@@ -855,9 +877,10 @@
   }
 
   .Home-SearchWrapper {
+    height: 130px;
     align-items: flex-start;
     border: 1px solid $grey-light;
-    bottom: -25%;
+    bottom: -75px;
     justify-content: flex-start;
     position: absolute;
     z-index: 100;
@@ -879,20 +902,21 @@
   }
 
   .Home-containerTitle {
-    gap: 2rem;
+    gap: 1rem;
     h1 {
-      font-size: 70px;
-      line-height: 80px;
+      font-size: 60px;
+      line-height: 65px;
+      width: 90%;
     }
     
     span {
-      font-size: 20px;
-      width: 75%;
+      font-size: 15px;
+      width: 60%;
     }
 
     button {
       cursor: pointer;
-      font-size: 20px;
+      font-size: 15px;
       width: 150px;
     }
   }
@@ -1026,7 +1050,7 @@
     display: flex;
     position: absolute;
     width: 20%;
-    top: -25%;
+    top: -50px;
     left: 10%;
     transform: rotate(15deg);
   }
@@ -1035,7 +1059,7 @@
     width: 30%;
     display: flex;
     position: absolute;
-    bottom: -25%;
+    bottom: -50px;
     right: 0;
   }
 }
