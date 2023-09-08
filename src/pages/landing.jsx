@@ -10,7 +10,7 @@ import Faq from '../components/faq';
 
 const Landing = () => {
 
-    let { packageId } = useParams();
+    const { packageId } = useParams();
     const [trip,setTrip] = useState({})
     const [description,setDescription] = useState({})
     const [itineraries,setItineraries] = useState({})
@@ -166,23 +166,35 @@ const Landing = () => {
                     <ul className='landing-ul'>
                     {inclusiones && inclusiones.length && inclusiones.map ( item =>(
                       <li key={item.id} className='landing-li'>
-                        <div><i class="fa-sharp fa-light fa-circle-check"></i>{item.title}</div>
+                        <div>
+                          <i class="fa-sharp fa-light fa-circle-check"></i>
+                          <span>{item.title}</span>
+                        </div>
                         <p>{item.description}</p>
                       </li>
                       )
                     )       
                     }
                     <li className='landing-li'>
-                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
-                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                      <div>
+                        <i class="fa-solid fa-plane-departure"></i>
+                        <span>Vuelos</span>
+                      </div>
+                      <p>Helicóptero Aterrizaje en el suelo del cañón champán Vistas del atardecer</p>
                     </li>
                     <li className='landing-li'>
-                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
-                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                      <div>
+                        <i class="fa-sharp fa-solid fa-burger-soda"></i>
+                        <span>Refrigerios</span>
+                      </div>
+                      <p>Champán y refrescos una barra de higos, galletas, barra de frutas, queso, galletas saladas y agua.</p>
                     </li>
                     <li className='landing-li'>
-                      <div><i class="fa-sharp fa-light fa-circle-check"></i>Prueba</div>
-                      <p>asjnjsnadjnsadnskldmklsamdsmadkmaspdmkasmdksld</p>
+                      <div>
+                        <i class="fa-solid fa-bus"></i>
+                        <span>Traslados</span>
+                      </div>
+                      <p>hotel ida y vuelta</p>
                     </li>
                     </ul>
                   </div>
@@ -193,7 +205,12 @@ const Landing = () => {
                     <ul className='landing-ul'>
                     {noInclusiones && noInclusiones.length && noInclusiones.map ( item =>(
                       <li key={item.id} className='landing-li no-include'>
-                        <div><i class="fa-duotone fa-circle-xmark"></i>{item.title}</div>
+                        <div>
+                          <i class="fa-solid fa-ban"></i>
+                          <span>
+                            {item.title}
+                          </span>
+                        </div>
                         <p>{item.description}</p>
                       </li>
                       )

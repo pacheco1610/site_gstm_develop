@@ -61,15 +61,12 @@
       font-size: 12px;
   }
 }
-.containerPrice-controls {
-  display: flex;
-  align-items: center;
-  div {
-      margin: 0 5px;
-  }
-  i {
-      cursor: pointer;
-  }
+.containerPrice-info {
+  h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    }
 }
 
 @include breakpoint('medium') { 

@@ -11,20 +11,22 @@ import {
 } from "react-router-dom";
 import Home from './pages/home'
 import About from './pages/about';
-import Landing from './pages/landing';
-import Destino from './pages/landingDestino'
+import Destino from './pages/landingDestino';
+import LandingTour from './pages/landingTour';
+
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
   },  {
-    path: "/about",
+    path: "/about/:id",
     element: <About/>,
   },
   {
-    path:"/landing",
-    element: <Landing/>,
+    path:"/landingTour/:packageId",
+    element: <LandingTour/>,
   },
   {
     path:"/destinos",
