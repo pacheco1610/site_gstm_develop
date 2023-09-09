@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/Logo.png';
+import logo from '../assets/trotatourism-logo.png';
 import classNames from 'classnames';
 import { useNavigate  } from "react-router-dom";
 
