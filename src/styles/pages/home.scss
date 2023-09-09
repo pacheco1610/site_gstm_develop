@@ -58,7 +58,7 @@
 .Home-background {
   align-items: center;
   background-color: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/home-slider.jpg");
+
   background-position: center;
   background-size: cover;
   display: flex;
@@ -134,11 +134,14 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width:calc(100%/4);
   background-color: $blue-dark;
   height: 2px;
   padding: 0 !important;
   transition: ease-in-out 0.5s;
+}
+
+.Home-SearchInput {
+  position: relative;
 }
 
 .Home-SearchInputContainer {
@@ -425,7 +428,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 
   .Home-destinationContainer {
@@ -452,7 +455,6 @@
       justify-content: center;
       padding: 1rem;
       gap: 2rem;
-      height: 40%;
 
       div:first-child {
         display: flex;
@@ -816,6 +818,46 @@
   border-radius: 1rem;
 }
 
+.suggestionsContainer {
+  top: 60px;
+  position: absolute;
+  background-color: $white;
+  z-index: 1000;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  div {
+    width: 100%;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.Home-destinationButton-active {
+  button {
+    color: $white;
+    background-color: $bluey-button;
+  }
+}
+
+
 @include breakpoint('medium') { 
   .Home-DescubreCarouselControllers {
     width: 100%;
@@ -873,7 +915,9 @@
   }
 
   .Home-SearchInput {
+    position: relative;
     border-right: 1px solid $grey-light;
+    min-width: 190px;
   }
 
   .Home-SearchWrapper {

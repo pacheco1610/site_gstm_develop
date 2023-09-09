@@ -8,20 +8,60 @@ import Footer from '../components/footer'
 import Header from '../components/header'
 import axios from 'axios'
 import modelDestino from '../scripts/modelDestinos';
+import modelServicios from '../scripts/modelServicios';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import Moment from 'moment'
+import { useNavigate  } from "react-router-dom";
+import imagen from '../assets/home-slider.jpg'
+import qs from 'qs'
+import plurales from 'plurales';
 
 const Home = () => {
   const [dataDestinos, setDataDestinos] = useState(false)
+  const [ciudad, setCiudad] = useState('')
+  const [pais, setPais] = useState('')
+  const [typeSelect, setTypeSelect] = useState('atraccion')
+  const [address, setAddress] = useState("")
+  const [tipos, setTipos] = useState([])
+  const [selectOption, setSelectOption] = useState('atraccion')
+  const [dataServicios, setDataServicios] = useState([])
+  const [tiposServicios, setTiposServicios] = useState([])
+  const navigate = useNavigate();
   
   useEffect(() => {
-    axios.get('https://cms.trotatourism.com/api/servicios')
+    axios.get('https://cms.trotatourism.com/api/servicios?populate=*&')
     .then(response => {
         const data = new modelDestino(response.data)
+        setTipos(tipos)
         setDataDestinos(data)
+        handleSendServiceFilter(selectOption)
+    })
+    axios.get('https://cms.trotatourism.com/api/tipo-servicios')
+    .then(response => {
+      setTiposServicios(response.data.data)
     })
   }, []);
 
-  const handleSelectMenu = ( margin ) => {
+  const handleSendServiceFilter = (selectOption) => {
+    const query = qs.stringify({
+      filters: {
+        tipo_servicio: {
+          titulo: {
+            $eq: selectOption
+          }
+        }
+      }
+    })
+    axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&${query}`)
+    .then(response => {
+      const servicios = new modelServicios(response.data.data)
+        setDataServicios(servicios.servicios)
+    })
+  }
+
+  const handleSelectMenu = ( margin, selectItem ) => {
     const component = document.getElementById('selectMenu')
+    setTypeSelect(selectItem)
 
     component.style.left = margin
   }
@@ -47,45 +87,105 @@ const Home = () => {
     slider.scrollLeft += type === "left" ? -firstElementWidth : firstElementWidth;
   }
 
+  const handleSelect = async (value) => {
+    const result = await geocodeByAddress(value);
+    setAddress(value);
+    result[0]?.address_components.map(address => {
+      const types = address.types;
+      if (types.find(type => type === 'locality')) {
+        let locality = types.find(type => type === 'locality') ? address.long_name : '';
+        setCiudad(locality)
+      } else if (types.find(type => type === 'country')) {
+        let country = types.find(type => type === 'country') ? address.long_name : '';
+        setPais(country)
+      }
+    })
+  }
+
+  const handleSubmitSearch = (e) => {
+    e.preventDefault()
+    const tipos = [typeSelect]
+    let url = new URL(window.location)
+    url.searchParams.set('ciudad',ciudad)
+    url.searchParams.set('pais',pais)
+    url.searchParams.set('tipo',JSON.stringify(tipos))
+    navigate(`/destino${url.search}`)
+  }
+
+  const handleDestino = (value) => {
+    let url = new URL(window.location)
+    url.searchParams.set('ciudad',value.locality)
+    url.searchParams.set('pais',value.country)
+    navigate(`/destino${url.search}`)
+  }
+
+  const handleSelectServicios = (type) => {
+    setSelectOption(type)
+    handleSendServiceFilter(type)
+  }
+
   return (
     <div className='Home'>
       <Header/>
-      <section className='Home-section Home-background'>
+      <section className='Home-section Home-background' style={{backgroundImage:` linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${imagen}")`}}>
         <div className="Home-wrapper">
           <div className="Home-containerTitle">
             <h1>Encuentra las mejores tarifas con nosotros</h1>
             <span>Nuestras tarifas son negociadas directas con el provedor garantizando la tarifa mas baja disponible</span>
-            <button>Explore Now</button>
+            <button onClick={() => navigate('/destino')}>Explore Now</button>
           </div>
           <div className="Home-containerSearch">
             <div className="Home-SearchWrapper">
               <div className="Home-SearchHeader">
-                <div onClick={() => handleSelectMenu('0%')}>Atracciones</div>
-                <div onClick={() => handleSelectMenu('25%')}>Tours</div>
-                <div onClick={() => handleSelectMenu('50%')}>Transporte</div>
-                <div onClick={() => handleSelectMenu('75%')}>Hoteles</div>
-                <div className='Home-SearchHeaderSelect' id='selectMenu'></div>
+                {(tiposServicios && tiposServicios.length > 0) && tiposServicios.map((servicio,index)=> {
+                  const margin = (100 / tiposServicios.length) * index
+                  return (
+                    <div onClick={() => handleSelectMenu(`${margin}%`, servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</div>
+                  )
+                })}
+                <div className='Home-SearchHeaderSelect' style={{width:`${100/tiposServicios.length}%`}} id='selectMenu'></div>
               </div>
-              <div className="Home-SearchBody">
+              <form className="Home-SearchBody" onSubmit={(e) => handleSubmitSearch(e)}>
                 <div className='Home-SearchInputContainer'>
                   <i className="fa-light fa-location-dot"></i>
                   <div className='Home-SearchInput'>
                     <label htmlFor="">Locación</label>
-                    <input type="text" placeholder='¿A dónde vas?' onLoad={() => console.log('prueba')} />
+                    <PlacesAutocomplete value={ address } onChange={setAddress} onSelect={handleSelect}>
+                      {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+                      <div>
+                        <input {...getInputProps({placeholder:'¿A dónde vas?'})} required={true}/>
+
+                        {(suggestions && suggestions.length > 0) && <div className='suggestionsContainer'>
+                          {loading ? <div>...cargando</div> : null }
+                          {suggestions.map(suggestion => {
+                            const style = {
+                              backgroundColor: suggestion.active ? '#e3e3e6' : "#fff"
+                            }
+
+                            return (
+                              <div {...getSuggestionItemProps(suggestion, { style })}>
+                                {suggestion?.description}
+                              </div>
+                            )
+                          })}
+                        </div>}
+                      </div>
+                      )}
+                    </PlacesAutocomplete>
                   </div>
                 </div>
                 <div className='Home-SearchInputContainer'>
                   <i className="fa-light fa-calendar"></i>
                   <div className='Home-SearchInput'>
-                    <label htmlFor="">Fecha</label>
-                    <input type="text" placeholder='¿Cuando?' />
+                    <label htmlFor="">¿Cuando?</label>
+                    <input type="date" min={Moment().format('YYYY-MM-DD')} required={true}/>
                   </div>
                 </div>
                 <div className='Home-SearchInputContainer'>
                   <i className="fa-light fa-user-vneck"></i>
                   <div className='Home-SearchInput'>
                     <label htmlFor="">Personas</label>
-                    <input type="text" placeholder='¿Cuantos van?' />
+                    <input type="number" placeholder='¿Cuantos van?' required={true} />
                   </div>
                 </div>
                 <div className='Home-SearchInputContainer'>
@@ -94,7 +194,7 @@ const Home = () => {
                      <i className="fa-light fa-magnifying-glass"></i>
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -106,7 +206,7 @@ const Home = () => {
             <div className="Home-sliderCarousel">
               {(dataDestinos && dataDestinos.length > 0) && dataDestinos.map(item => {
                 return (
-                  <div className='Home-sliderDescubreContainer'>
+                  <div className='Home-sliderDescubreContainer' onClick={() => handleDestino(item)}>
                     <img src={item.details?.photos[0]?.url} alt="" />
                     <div>
                       <h3>{ item.locality }</h3>
@@ -169,109 +269,41 @@ const Home = () => {
         <div className="Home-wrapper Home-DestinationWrapper">
           <div className='Home-destinationsHeader'>
             <div>
-              <h1>Explora nuestros destinos</h1>
+              <h1>Explora nuestros Servicios</h1>
               <span>Vamos a una aventura</span>
             </div>
             <div className='Home-destinationButtons'>
-              <div>
-                <button>Atracciones</button>
-              </div>
-              <div>
-                <button>Tours</button>
-              </div>
-              <div>
-                <button>Transporte</button>
-              </div>
-              <div>
-                <button>Hoteles</button>
-              </div>
+              {(tiposServicios && tiposServicios.length > 0) && tiposServicios.map((servicio,index)=> {
+                  return (
+                    <div className={selectOption === servicio?.attributes?.titulo ? 'Home-destinationButton-active' : ''}>
+                      <button onClick={() => handleSelectServicios(servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</button>
+                    </div>
+                  )
+                }
+              )}
             </div>
           </div>
           <div className='Home-destinationsBody'>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
+            {(dataServicios && dataServicios.length > 0) && dataServicios.map((servicio, index) => {
+              return (
+                index <= 5 ?
+                <div className='Home-destinationContainer' onClick={() => navigate(`/landingTour/${servicio.id}`)}>
+                  <div className='Home-destinationImagen' style={{backgroundImage:`URL('https://cms.trotatourism.com/${servicio.portada}')`}}>
+    
+                  </div>
+                  <div className='Home-destinationBody'>
+                    <div>
+                      <h1>{servicio.titulo}</h1>
+                      <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                    </div>
+                    <div>
+                      <h1>$125</h1><span>/per night</span>
+                    </div>
+                  </div>
+                </div> : null
+              )
+            })}
 
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
-
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
-
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
-
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
-
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
-            <div className='Home-destinationContainer'>
-              <div className='Home-destinationImagen' style={{backgroundImage:'URL("https://mexicorutamagica.mx/wp-content/uploads/2023/04/gran-canon-del-colorado-estados-unidos.jpg")'}}>
-
-              </div>
-              <div className='Home-destinationBody'>
-                <div>
-                  <h1>The beverly hills Hotel</h1>
-                  <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
-                </div>
-                <div>
-                  <h1>$125</h1><span>/per night</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -307,7 +339,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className='Home-section'>
+      {/*<section className='Home-section'>
         <div className="Home-wrapper Home-TopDeals">
           <div className='Home-TopDealsHeader'>
             <div className='Home-TopDealsTitle'>
@@ -387,8 +419,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section className='Home-section Home-sectionWork'>
+      </section> */}
+      <section className='Home-section'>
         <div className="Home-wrapper Home-TopDeals">
         <div className='Home-TopDealsHeader'>
           <div className='Home-TopDealsTitle Home-TitleTestimonios'>

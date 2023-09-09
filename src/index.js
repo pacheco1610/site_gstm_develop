@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <LandingTour/>,
   },
   {
-    path:"/destinos",
+    path:"/destino",
     element: <Destino/>
   }
   

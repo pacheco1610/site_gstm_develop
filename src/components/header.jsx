@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo-blue.png';
+import logo from '../assets/Logo.png';
 import classNames from 'classnames';
+import { useNavigate  } from "react-router-dom";
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(false)
+  const navigate = useNavigate();
 
   const classMenu = classNames({
     'Header-containerMenu': true,
@@ -18,8 +20,8 @@ const Header = () => {
   return (
     <nav className='Header'>
       <div className="Header-container">
-        <div className="Header-logo">
-            <img src={ logo } alt="" />
+        <div className="Header-logo" onClick={() => navigate('/')}>
+          <img src={ logo } alt="" />
         </div>
         <div className={ classMenu }>
           <ul className='Header-menu'>

@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../components/header'
 
-const HeaderSecundary = ({title,subtitle,img}) => {
+const HeaderSecundary = ({title,subtitle,img,tipo, locacion}) => {
+  const ciudad = JSON.parse(locacion)
   return (
     <div className='HeaderSecundary-background'>
       <Header/>
@@ -12,9 +13,9 @@ const HeaderSecundary = ({title,subtitle,img}) => {
             <div className='HeaderSecundary-map'>
               <li>Home</li>
               <li><i className="fa-sharp fa-light fa-chevron-right"></i></li>
-              <li>Tours</li>
+              <li>{tipo}</li>
               <li><i className="fa-sharp fa-light fa-chevron-right"></i></li>
-              <li>Las vegas</li>
+              <li>{ciudad.locality}</li>
             </div>
             <div className='HeaderSecundary-share'>
               <button><i class="fa-light fa-arrow-up-from-square"></i></button>
