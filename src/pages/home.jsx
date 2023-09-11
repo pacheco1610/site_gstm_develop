@@ -23,6 +23,7 @@ const Home = () => {
   const [typeSelect, setTypeSelect] = useState('atraccion')
   const [address, setAddress] = useState("")
   const [tipos, setTipos] = useState([])
+  const [testimonios, setTestimonios] = useState([])
   const [selectOption, setSelectOption] = useState('atraccion')
   const [dataServicios, setDataServicios] = useState([])
   const [tiposServicios, setTiposServicios] = useState([])
@@ -39,6 +40,10 @@ const Home = () => {
     axios.get('https://cms.trotatourism.com/api/tipo-servicios')
     .then(response => {
       setTiposServicios(response.data.data)
+    })
+    axios.get('https://cms.trotatourism.com/api/testimonios')
+    .then(response => {
+      setTestimonios(response.data.data)
     })
   }, []);
 
@@ -438,81 +443,25 @@ const Home = () => {
         </div>
         <div className='Home-sliderDeals'>
           <div className="Home-sliderCarouselTestimonials">
-            <div className='Home-sliderTestimonialsContainer'>
-              <div className='Home-sliderTestimonailsWrapper'>
+            {(testimonios && testimonios.length > 0) && testimonios.map(item => {
+              return (
+                <div className='Home-sliderTestimonialsContainer'>
+                <div className='Home-sliderTestimonailsWrapper' key={item.id}>
                 <div>
                   <div className='Home-sliderTestimonailsIcon'>😊</div>
                 </div>
                 <div>
                   <span>
-                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
+                    {item.attributes.testimonio}
                   </span>
                 </div>
                 <div>
-                  <h1>Esther Howard</h1>
+                  <h1>{item.attributes.autor}</h1>
                 </div>
               </div>
-            </div>
-            <div className='Home-sliderTestimonialsContainer'>
-              <div className='Home-sliderTestimonailsWrapper'>
-                <div>
-                  <div className='Home-sliderTestimonailsIcon'>😊</div>
-                </div>
-                <div>
-                  <span>
-                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
-                  </span>
-                </div>
-                <div>
-                  <h1>Esther Howard</h1>
-                </div>
               </div>
-            </div>
-            <div className='Home-sliderTestimonialsContainer'>
-              <div className='Home-sliderTestimonailsWrapper'>
-                <div>
-                  <div className='Home-sliderTestimonailsIcon'>😊</div>
-                </div>
-                <div>
-                  <span>
-                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
-                  </span>
-                </div>
-                <div>
-                  <h1>Esther Howard</h1>
-                </div>
-              </div>
-            </div>
-            <div className='Home-sliderTestimonialsContainer'>
-              <div className='Home-sliderTestimonailsWrapper'>
-                <div>
-                  <div className='Home-sliderTestimonailsIcon'>😊</div>
-                </div>
-                <div>
-                  <span>
-                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
-                  </span>
-                </div>
-                <div>
-                  <h1>Esther Howard</h1>
-                </div>
-              </div>
-            </div>
-            <div className='Home-sliderTestimonialsContainer'>
-              <div className='Home-sliderTestimonailsWrapper'>
-                <div>
-                  <div className='Home-sliderTestimonailsIcon'>😊</div>
-                </div>
-                <div>
-                  <span>
-                    "Booking with travel agency was the best decision i made for my solo trip. They made sure that"
-                  </span>
-                </div>
-                <div>
-                  <h1>Esther Howard</h1>
-                </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
         </div>

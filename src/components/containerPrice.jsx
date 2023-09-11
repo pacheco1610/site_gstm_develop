@@ -4,7 +4,7 @@ const ContainerPrice = ({trip}) => {
   return (
     <div className='containerPrice'>
       <div className='containerPrice-card'>
-        <div className='containerPrice-amount'>${trip?.precio && trip?.precio}<span>/{trip?.unidad.data.attributes.titulo && trip?.unidad.data.attributes.titulo}</span></div>
+        <div className='containerPrice-amount'>${trip?.precio && trip?.precio} {trip?.moneda.data.attributes.titulo && trip?.moneda.data.attributes.titulo}<span>/{trip?.unidad.data.attributes.titulo && trip?.unidad.data.attributes.titulo}</span></div>
         <div className='containerPrice-group'>
           <div className='containerPrice-item'>
             <div className='containerPrice-info'>
