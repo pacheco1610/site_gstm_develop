@@ -97,7 +97,10 @@
   .footer-item {
     width: calc(100%/4);
   }
-  
+  .footer-redes {
+    display: flex;
+    gap: 1rem;
+  }
   .footer-second {
     div:first-child {
       justify-content: flex-start;

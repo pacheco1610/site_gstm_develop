@@ -35,10 +35,10 @@ const Header = () => {
         </div>
         <div className={ classMenu }>
           <ul className='Header-menu'>
-            <li className='Header-li'>Inicio</li>
-            <li className='Header-li'>Destinos</li>
-            <li className='Header-li'>Servicios</li>
-            <li className='Header-li'>Contacto</li>
+            <a href="#home"><li className='Header-li'>Inicio</li></a>
+            <a href="#destinos"><li className='Header-li'>Destinos</li></a>
+            <a href="#servicios"><li className='Header-li'>Servicios</li></a>
+            <a href="#footer"><li className='Header-li'>Contacto</li></a>
             { user.activeLogin ? 
               <div className='Header-logout logout-mobile' onClick={() => handleLogin()}>
                 <span>{user.email}</span>
