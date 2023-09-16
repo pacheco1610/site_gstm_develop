@@ -132,7 +132,7 @@ const Home = () => {
   return (
     <div className='Home'>
       <Header/>
-      <section className='Home-section Home-background' style={{backgroundImage:` linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${imagen}")`}}>
+      <section id="home" className='Home-section Home-background' style={{backgroundImage:` linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${imagen}")`}}>
         <div className="Home-wrapper">
           <div className="Home-containerTitle">
             <h1>Encuentra las mejores tarifas con nosotros</h1>
@@ -204,7 +204,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className='Home-section'>
+      <section className='Home-section' id="destinos">
         <div className="Home-wrapper Home-wrapperDescubre">
           <h1>Descubre nuestros destinos</h1>
           <div className='Home-sliderDescubre'>
@@ -270,7 +270,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className='Home-section'>
+      <section className='Home-section' id="servicios">
         <div className="Home-wrapper Home-DestinationWrapper">
           <div className='Home-destinationsHeader'>
             <div>
