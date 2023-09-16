@@ -11,6 +11,7 @@ import modelServicios from '../scripts/modelServicios'
 import modelTipos from '../scripts/modelTipos'
 import imagen from '../assets/home-slider.jpg'
 import plurales from 'plurales';
+import { useSelector } from 'react-redux';
 
 const LandingDestino = () => {
   const [loading, setLoading] = useState(true)
@@ -29,6 +30,7 @@ const LandingDestino = () => {
     background: imagen,
   })
   const [servicios, setServicios] = useState([])
+  const user = useSelector((state) => state.user)
   
   useEffect(() => {
     axios.get('https://cms.trotatourism.com/api/tipo-servicios')
@@ -306,7 +308,7 @@ const LandingDestino = () => {
             </div>
             <div className='Destino-tours'>
               {destino && <div className='Destino-toursHeader'>
-                <h1>{servicios.length} aventuras</h1><span>en {destino.locality}</span>
+                <h1>{servicios.length} aventuras</h1><span>en {destino?.locality}</span>
               </div>}
               <div className='Destinos-toursWrapper'>
                 {servicios.length > 0 ? servicios.map(servicio => {
@@ -319,12 +321,18 @@ const LandingDestino = () => {
                           </div>
                           <div className='Destinos-tourContainerText-body'>
                             <h1>{servicio.titulo}</h1>
-                            <p><i className="fa-sharp fa-solid fa-location-dot"></i> <span>{servicio.locacion.locality}, {servicio.locacion.country}</span></p>
+                            <p><i className="fa-sharp fa-solid fa-location-dot"></i> <span>{servicio.locacion?.locality}, {servicio.locacion.country}</span></p>
                           </div>
                           <div className='Destinos-tourContainerText-footer'>
-                            <div>
-                              <h1>${servicio.precio}</h1><span className='Destinos-tourContainerText-per'>/por {servicio.unidad}</span>
-                            </div>
+                            { user.activeLogin ? 
+                              <div>
+                                <h1>${servicio.precio}</h1><span className='Destinos-tourContainerText-per'>/por {servicio.unidad}</span>
+                              </div>
+                              :
+                              <div>
+                                <span>Inicia sesión para ver nuestros precios</span>
+                              </div>
+                            }
                             <div className='Header-Login' onClick={() => navigate(`/landingTour/${servicio.id}`)}>
                               <span>Más detalles</span>
                             </div>

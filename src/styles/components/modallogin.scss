@@ -1,0 +1,96 @@
+.ModalLogin-Wrapper {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.687);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalLogin-Container {
+  width: 300px;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid $grey-light;
+}
+
+.ModalLogin-Cover {
+  width: 100%;
+  aspect-ratio: 1.7/1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 2.5rem;
+  font-weight: 500;
+  background-color: #000;
+}
+
+.ModalLogin-ContainerInputs {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-top: -2rem;
+  gap: 1rem;
+
+  input {
+    padding: 0.5rem;
+    background-color: $white;
+    border-radius: 1rem;
+    border: 1px solid $grey-light;
+  }
+
+  button {
+    color: $white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    background-color: $bluey-button;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+  }
+}
+
+.ModalLogin-close {
+  display: flex;
+  justify-content: flex-end;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.ModalLogin-Registrate {
+  display: flex;
+  gap: 0.2rem;
+
+  span:nth-child(2) {
+    cursor: pointer;
+    color: $bluey-button;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
+
+.ModalSignUp-Success {
+  font-size: 14px;
+  font-weight: 500;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  background-color: $green-light;
+}

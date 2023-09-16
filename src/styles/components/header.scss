@@ -121,6 +121,27 @@
   }
 }
 
+.Header-logout {
+  background-color: $grey-light;
+  padding: 0.3rem 0.5rem;
+  border-radius: 1rem;
+  color: $blue-text;
+  font-weight: 700;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logout-desktop {
+  display: none;
+}
+
+.login-mobile {
+  display: flex;
+}
+
 @include breakpoint('medium') {
   .Header-container {
     display: flex;
@@ -165,6 +186,18 @@
   }
 
   .Header-menuMobile {
+    display: none;
+  }
+
+  .logout-desktop {
+    display: flex;
+  }
+  
+  .logout-mobile {
+    display: none;
+  }
+
+  .login-mobile {
     display: none;
   }
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import imagen1 from '../assets/imagenslider1.png'
 import disneyImagen1 from '../assets/imagen1.jpg'
 import disneyImagen2 from '../assets/imagen2.jpg'
 import flye from '../assets/maleta.png'
@@ -15,6 +14,7 @@ import { useNavigate  } from "react-router-dom";
 import imagen from '../assets/home-slider.jpg'
 import qs from 'qs'
 import plurales from 'plurales';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
   const [dataDestinos, setDataDestinos] = useState(false)
@@ -24,9 +24,10 @@ const Home = () => {
   const [address, setAddress] = useState("")
   const [tipos, setTipos] = useState([])
   const [testimonios, setTestimonios] = useState([])
-  const [selectOption, setSelectOption] = useState('atraccion')
+  const [selectOption, setSelectOption] = useState('tour')
   const [dataServicios, setDataServicios] = useState([])
   const [tiposServicios, setTiposServicios] = useState([])
+  const user = useSelector((state) => state.user)
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -214,7 +215,7 @@ const Home = () => {
                   <div className='Home-sliderDescubreContainer' onClick={() => handleDestino(item)}>
                     <img src={item.details?.photos[0]?.url} alt="" />
                     <div>
-                      <h3>{ item.locality }</h3>
+                      <h3>{ item?.locality }</h3>
                       <span>{ item.numberTrips } Aventuras</span>
                     </div>
                   </div>
@@ -299,11 +300,17 @@ const Home = () => {
                   <div className='Home-destinationBody'>
                     <div>
                       <h1>{servicio.titulo}</h1>
-                      <span><i className="fa-sharp fa-solid fa-location-dot"></i> Los Angeles, USA</span>
+                      <span><i className="fa-sharp fa-solid fa-location-dot"></i>{servicio.locacion.locality}, {servicio.locacion.country}</span>
                     </div>
-                    <div>
-                      <h1>$125</h1><span>/per night</span>
-                    </div>
+                    { user.activeLogin ? 
+                      <div>
+                        <h1>${servicio.precio} {servicio.moneda}</h1><span>/por {servicio.unidad}</span>
+                      </div>
+                      :
+                      <div>
+                        <span>Inicia sesión para ver nuestros precios</span>
+                      </div>
+                    }
                   </div>
                 </div> : null
               )
@@ -312,7 +319,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className='Home-section Home-sectionWork'>
+      {/*<section className='Home-section Home-sectionWork'>
         <div className="Home-wrapper Home-ItWork">
           <div className='Home-ItWorkHeader'>
             <h1>Como funciona</h1>
@@ -343,7 +350,7 @@ const Home = () => {
             
           </div>
         </div>
-      </section>
+      </section>*/}
       {/*<section className='Home-section'>
         <div className="Home-wrapper Home-TopDeals">
           <div className='Home-TopDealsHeader'>
@@ -425,7 +432,7 @@ const Home = () => {
           </div>
         </div>
       </section> */}
-      <section className='Home-section'>
+      <section className='Home-section Home-sectionWork'>
         <div className="Home-wrapper Home-TopDeals">
         <div className='Home-TopDealsHeader'>
           <div className='Home-TopDealsTitle Home-TitleTestimonios'>

@@ -3,18 +3,16 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './styles/main.scss'
 import 'leaflet/dist/leaflet.css';
-
+import { Provider } from 'react-redux'
 import {
   createBrowserRouter,
   RouterProvider,
-  useParams
 } from "react-router-dom";
 import Home from './pages/home'
 import About from './pages/about';
 import Destino from './pages/landingDestino';
 import LandingTour from './pages/landingTour';
-
-
+import {store} from './redux/store'
 
 const router = createBrowserRouter([
   {
@@ -38,7 +36,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

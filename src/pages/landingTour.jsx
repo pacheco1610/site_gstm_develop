@@ -22,7 +22,7 @@ const getToken = async () => {
   .then(function (response) {
     // manejar respuesta exitosa
     console.log(response.data.data.attributes);
-    setTrip(response.data.data.attributes);
+    setTrip(response?.data?.data?.attributes);
   })
   .catch(function (error) {
     // manejar error

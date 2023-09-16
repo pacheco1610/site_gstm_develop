@@ -1,10 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const ContainerPrice = ({trip}) => {
+  const user = useSelector((state) => state.user)
+
   return (
     <div className='containerPrice'>
       <div className='containerPrice-card'>
-        <div className='containerPrice-amount'>${trip?.precio && trip?.precio} {trip?.moneda.data.attributes.titulo && trip?.moneda.data.attributes.titulo}<span>/{trip?.unidad.data.attributes.titulo && trip?.unidad.data.attributes.titulo}</span></div>
+        { user.activeLogin ? 
+          <div className='containerPrice-amount'>
+            ${trip?.precio && trip?.precio} {trip?.moneda?.data?.attributes?.titulo && trip?.moneda.data.attributes.titulo}<span>/{trip?.unidad?.data?.attributes?.titulo && trip?.unidad?.data?.attributes?.titulo}</span>
+          </div>
+          : 
+          <div className='containerPrice-amount'>
+            <span>Inicia sesión para ver nuestros precios</span>
+          </div>
+        }
         <div className='containerPrice-group'>
           <div className='containerPrice-item'>
             <div className='containerPrice-info'>
@@ -27,7 +38,12 @@ const ContainerPrice = ({trip}) => {
             </div>
           </div>
         </div>
-        <a target='_blank' href={trip?.url_wetravel && trip?.url_wetravel} className='containerPrice-btn'>Book Now</a>
+        { user.activeLogin ? 
+          <a target='_blank' href={trip?.url_wetravel && trip?.url_wetravel} className='containerPrice-btn'>Book Now</a>
+          :
+          null
+        }
+        
       </div>
   </div>
   )
