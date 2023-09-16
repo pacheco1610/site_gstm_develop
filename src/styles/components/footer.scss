@@ -82,6 +82,12 @@
     align-items: center;
     border-radius: 100%;
   }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 }
 
 @include breakpoint('medium') {  

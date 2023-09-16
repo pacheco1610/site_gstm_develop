@@ -27,6 +27,7 @@ const Home = () => {
   const [selectOption, setSelectOption] = useState('tour')
   const [dataServicios, setDataServicios] = useState([])
   const [tiposServicios, setTiposServicios] = useState([])
+  const [emailNewsLatter, setNewsLatter] = useState('')
   const user = useSelector((state) => state.user)
   const navigate = useNavigate();
   
@@ -128,6 +129,38 @@ const Home = () => {
   const handleSelectServicios = (type) => {
     setSelectOption(type)
     handleSendServiceFilter(type)
+  }
+
+  const handleNewsLatter = (e) => {
+    e.preventDefault()
+    console.log(emailNewsLatter)
+    axios.post('https://a.klaviyo.com/client/subscriptions/?company_id=WHkBzF', 
+      {
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: emailNewsLatter,
+                }
+              }
+            }
+          },
+          relationships: {list: {data: {type: 'list', id: 'XtBaJz'}}}
+        }
+      }, 
+      {
+        headers: {
+          "Authorization": 'Klaviyo-API-Key pk_feac6c2c4a38753658bec5eba0bfb78c99',
+          "revision": Moment().format('YYYY-MM-DD'),
+          "Content-Type": "application/json",
+        }
+    })
+    .then(response => {
+      console.log(response)
+    })
   }
 
   return (
@@ -474,13 +507,13 @@ const Home = () => {
         </div>
       </section>
       <section className='Home-section Home-NewsLatter'>
-        <div className="Home-wrapper Home-NewsLatterContainer">
+        <form className="Home-wrapper Home-NewsLatterContainer" onSubmit={(e) => handleNewsLatter(e)}>
           <div className='Home-NewsLatterHeader' >
             <h1>Your Travel Journey Starts Here</h1>
             <span>Subscribe to see secret deals prices drop moment you sign up!</span>
           </div>
           <div className='Home-NewsLatterBody'>
-            <input type="text" placeholder='Enter you email address'/>
+            <input type="text" placeholder='Enter you email address' onChange={(e) => setNewsLatter(e.target.value)} required/>
             <button>Subscribe</button>
           </div>
           <div className='Home-NewsLatterFlye'>
@@ -489,7 +522,7 @@ const Home = () => {
           <div className='Home-NewsLatterPalm'>
             <img src={ palm } alt="" />
           </div>
-        </div>
+        </form>
       </section>
       <Footer />
     </div>
