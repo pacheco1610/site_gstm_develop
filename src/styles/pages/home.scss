@@ -87,8 +87,8 @@
   }
 
   button {
-    background-color: $yellow-light;
-    color: $blue-dark;
+    background-color: $secundary;
+    color: $white;
     padding: 1rem;
     border-radius: 2rem;
   }
@@ -169,7 +169,7 @@
 
   button {
     align-items: center;
-    background-color: $bluey-button;
+    background-color: $primary;
     border-radius: 1rem;
     color: $white;
     display: flex;
@@ -417,7 +417,7 @@
       cursor: pointer;
 
       &:hover {
-        border: 1px solid $bluey-button;
+        border: 1px solid $primary;
         transition: ease-in 0.3s;
       }
     }
@@ -482,7 +482,7 @@
       }
 
       i {
-        color: $bluey-button;
+        color: $primary;
       }
     }
 
@@ -551,7 +551,7 @@
     i {
       font-size: 30px;
       color: $white;
-      background-color: $bluey-button;
+      background-color: $primary;
       height: 60px;
       width: 60px;
       display: flex;
@@ -785,7 +785,8 @@
 
   button {
     width: 30%;
-    background-color: $yellow-light;
+    background-color: $secundary;
+    color: $white;
     padding: 0.5rem;
     border-radius: 1rem;
   }
@@ -853,7 +854,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .Home-destinationButton-active {
   button {
     color: $white;
-    background-color: $bluey-button;
+    background-color: $primary;
   }
 }
 

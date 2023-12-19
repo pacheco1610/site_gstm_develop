@@ -9,7 +9,7 @@ const HeaderSecundary = ({title,subtitle,img,tipo, locacion}) => {
       <div className="HeaderSecundary-wrapper">
         <div className="HeaderSecundary-container">
           <div className='Header-Secundary-buttons'>
-            <button><i className="fa-sharp fa-light fa-chevron-left"></i> Go Home</button>
+            <a href='/'><i className="fa-sharp fa-light fa-chevron-left"></i> Go Home</a>
             <div className='HeaderSecundary-map'>
               <li>Home</li>
               <li><i className="fa-sharp fa-light fa-chevron-right"></i></li>

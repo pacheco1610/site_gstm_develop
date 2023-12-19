@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/trotatourism-logo.png';
+import logo from '../assets/gstm-imagotipo.png';
 import classNames from 'classnames';
 import { useNavigate  } from "react-router-dom";
 
@@ -25,8 +25,8 @@ const Header = () => {
         </div>
         <div className={ classMenu }>
           <ul className='Header-menu'>
-            <li className='Header-li'>Inicio</li>
-            <li className='Header-li'>Destinos</li>
+            <li className='Header-li' onClick={() => navigate('/')}>Inicio</li>
+            <li className='Header-li' onClick={() => navigate('/destinos')}>Destinos</li>
             <li className='Header-li'>Servicios</li>
             <li className='Header-li'>Contacto</li>
           </ul>
