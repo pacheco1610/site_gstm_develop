@@ -24,7 +24,7 @@ const Home = () => {
   const [address, setAddress] = useState("")
   const [tipos, setTipos] = useState([])
   const [testimonios, setTestimonios] = useState([])
-  const [selectOption, setSelectOption] = useState('tour')
+  const [selectOption, setSelectOption] = useState('Atracción')
   const [dataServicios, setDataServicios] = useState([])
   const [tiposServicios, setTiposServicios] = useState([])
   const [emailNewsLatter, setNewsLatter] = useState('')
@@ -34,10 +34,14 @@ const Home = () => {
   useEffect(() => {
     axios.get('https://cms.trotatourism.com/api/servicios?populate=*&')
     .then(response => {
-        const data = new modelDestino(response.data)
-        setTipos(tipos)
-        setDataDestinos(data)
-        handleSendServiceFilter(selectOption)
+        const totalServices = response.data.meta.pagination.total;
+        axios.get(`https://cms.trotatourism.com/api/servicios?pagination[pageSize]=${totalServices}&populate=*&`)
+        .then(response => {
+          const data = new modelDestino(response.data)
+          setTipos(tipos)
+          setDataDestinos(data)
+          handleSendServiceFilter(selectOption)
+        })
     })
     axios.get('https://cms.trotatourism.com/api/tipo-servicios')
     .then(response => {
@@ -178,8 +182,9 @@ const Home = () => {
               <div className="Home-SearchHeader">
                 {(tiposServicios && tiposServicios.length > 0) && tiposServicios.map((servicio,index)=> {
                   const margin = (100 / tiposServicios.length) * index
+                  console.log(servicio?.attributes?.titulo)
                   return (
-                    <div onClick={() => handleSelectMenu(`${margin}%`, servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</div>
+                    <div onClick={() => handleSelectMenu(`${margin}%`, servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'Tour' ? 'tours' : plurales(servicio?.attributes?.titulo)}</div>
                   )
                 })}
                 <div className='Home-SearchHeaderSelect' style={{width:`${100/tiposServicios.length}%`}} id='selectMenu'></div>
@@ -315,7 +320,7 @@ const Home = () => {
               {(tiposServicios && tiposServicios.length > 0) && tiposServicios.map((servicio,index)=> {
                   return (
                     <div className={selectOption === servicio?.attributes?.titulo ? 'Home-destinationButton-active' : ''}>
-                      <button onClick={() => handleSelectServicios(servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</button>
+                      <button onClick={() => handleSelectServicios(servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'Tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</button>
                     </div>
                   )
                 }
@@ -465,7 +470,9 @@ const Home = () => {
           </div>
         </div>
       </section> */}
-      <section className='Home-section Home-sectionWork'>
+      {
+        /*
+        <section className='Home-section Home-sectionWork'>
         <div className="Home-wrapper Home-TopDeals">
         <div className='Home-TopDealsHeader'>
           <div className='Home-TopDealsTitle Home-TitleTestimonios'>
@@ -506,6 +513,8 @@ const Home = () => {
         </div>
         </div>
       </section>
+      */
+      }
       <section className='Home-section Home-NewsLatter'>
         <form className="Home-wrapper Home-NewsLatterContainer" onSubmit={(e) => handleNewsLatter(e)}>
           <div className='Home-NewsLatterHeader' >

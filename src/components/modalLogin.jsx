@@ -79,7 +79,7 @@ const ModalLogin = ({ activeModal, closeModal }) => {
                 </button>
               </div>
               <div className='ModalLogin-Registrate'>
-                <span>¿Aun no tienes cuenta?</span> <span onClick={() => setTypeFaorm(false)}>Regitrate</span>
+                <span>¿Aun no tienes cuenta?</span> <span onClick={() => setTypeFaorm(false)}>Registrate</span>
               </div>
             </form>
           </div>

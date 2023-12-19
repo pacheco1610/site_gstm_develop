@@ -224,7 +224,7 @@ const LandingDestino = () => {
                   {(tiposServicios && tiposServicios.length > 0) && tiposServicios.map((servicio,index)=> {
                     const margin = (100 / tiposServicios.length) * index
                     return (
-                      <div onClick={() => handleSelectMenu(`${margin}%`, servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</div>
+                      <div onClick={() => handleSelectMenu(`${margin}%`, servicio?.attributes?.titulo)}>{servicio?.attributes?.titulo === 'Tour' ? 'tours' :plurales(servicio?.attributes?.titulo)}</div>
                     )
                   })}
                   <div className='Home-SearchHeaderSelect' style={{width:`${100/tiposServicios.length}%`}} id='selectMenu'></div>

@@ -19,7 +19,7 @@ const Footer = () => {
           <div className='footer-item'>
             <h1>Escríbenos</h1>
             <div className='footer-ItemContacto footer-itemContactNumber'>
-              <span>Soporte en vivo</span>
+              <span>Para mayor información</span>
               <h1>info@trotatourism.com</h1>
             </div>
             <div className='footer-ItemContacto footer-itemContactNumber'>

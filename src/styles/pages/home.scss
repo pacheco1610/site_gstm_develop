@@ -127,6 +127,7 @@
     padding: 0.5rem 0;
     font-size: 13px;
     cursor: pointer;
+    text-transform: capitalize;
   }
 }
 
@@ -415,6 +416,7 @@
       border-radius: 1rem;
       font-weight: 500;
       cursor: pointer;
+      text-transform: capitalize;
 
       &:hover {
         border: 1px solid $bluey-button;
