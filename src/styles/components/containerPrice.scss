@@ -35,13 +35,13 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background-color: $bluey-light;
+  background-color: $primary;
   cursor: pointer;
   color: $white;
   border-radius: 5px;
 }
 .containerPrice-btn:hover {
-  background-color: $bluey;
+  background-color: $primary-dark;
 }
 .containerPrice-group {
   width: 100%;

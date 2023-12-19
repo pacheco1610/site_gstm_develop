@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/trotatourism-logo.png';
+import logo from '../assets/gstm-imagotipo.png';
 import classNames from 'classnames';
 import { useNavigate  } from "react-router-dom";
 import ModalLogin from './modalLogin'

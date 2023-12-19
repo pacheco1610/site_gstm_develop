@@ -175,7 +175,7 @@ const Home = () => {
           <div className="Home-containerTitle">
             <h1>Encuentra las mejores tarifas con nosotros</h1>
             <span>Nuestras tarifas son negociadas directas con el provedor garantizando la tarifa mas baja disponible</span>
-            <button onClick={() => navigate('/destino')}>Explore Now</button>
+            <button className='Home-explore' onClick={() => navigate('/destino')}>Explore Now</button>
           </div>
           <div className="Home-containerSearch">
             <div className="Home-SearchWrapper">
