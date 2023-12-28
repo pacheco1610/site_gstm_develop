@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import logo from '../assets/gstm-imagotipo.png';
 import classNames from 'classnames';
 import { useNavigate  } from "react-router-dom";
 import ModalLogin from './modalLogin'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../redux/userSlice'
-
+import axios from 'axios'
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(false)
   const [activeLogin, setActiveLogin] = useState(false)
+  const [url,setUrl] = useState();
   const user = useSelector((state) => state.user)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    axios.get('https://cms-l4tiq.ondigitalocean.app/api/page-externas')
+    .then(response => {
+      const data =response?.data?.data; 
+      data.forEach(element => {
+        console.log(element)
+      });
+      setUrl(data);
+    })
+
+  }, [])
 
   const classMenu = classNames({
     'Header-containerMenu': true,
@@ -39,6 +52,16 @@ const Header = () => {
             <a href="#destinos"><li className='Header-li'>Destinos</li></a>
             <a href="#servicios"><li className='Header-li'>Servicios</li></a>
             <a href="#footer"><li className='Header-li'>Contacto</li></a>
+            {
+              url?.map ( item =>(
+                <a key={item.attributes.Name} href={item.attributes.url} target='_blank'>
+                  <li className='Header-li'>
+                    {item.attributes.Name}
+                  </li>
+                </a>
+                    )
+                  )       
+            }
             { user.activeLogin ? 
               <div className='Header-logout logout-mobile' onClick={() => handleLogin()}>
                 <span>{user.email}</span>

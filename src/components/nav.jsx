@@ -1,8 +1,12 @@
 import React,{useState} from 'react';
 import logo from '../assets/logo-blanco.png';
 
+
 const Nav = ( {Fontcolor} ) => {
   const [menu,setMenu] = useState(true);
+
+
+  
 
   const handleMenu = () => {
       setMenu(!menu);
@@ -13,7 +17,7 @@ const Nav = ( {Fontcolor} ) => {
         <div className='Nav-icon' onClick={() => handleMenu()}><i className="fa-solid fa-bars"></i></div>
         <ul className={menu ? ' Nav-ul Nav-ulIshidden ' : 'Nav-ul' }>
            <a href="#"><li className='Nav-btnClose' onClick={() => handleMenu()}>x</li></a>
-           <a href="#"><li className={Fontcolor === '#000' ? "Nav-li Nav-fontBlack":"Nav-li"}>Home</li></a>
+           <a href="#"><li className={Fontcolor === '#000' ? "Nav-li Nav-fontBlack":"Nav-li"}>Ho</li></a>
            <a href="#"><li className={Fontcolor === '#000' ? "Nav-li Nav-fontBlack":"Nav-li"} >Destinos</li></a>
             <li className={Fontcolor === '#000' ? "Nav-li Nav-fontBlack":"Nav-li"} >¿Quienes somos?</li>
             <li className={Fontcolor === '#000' ? "Nav-li Nav-fontBlack":"Nav-li"} >Productos</li>
