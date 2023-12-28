@@ -32,10 +32,10 @@ const Home = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    axios.get('https://cms.trotatourism.com/api/servicios?populate=*&')
+    axios.get('https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&')
     .then(response => {
         const totalServices = response.data.meta.pagination.total;
-        axios.get(`https://cms.trotatourism.com/api/servicios?pagination[pageSize]=${totalServices}&populate=*&`)
+        axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?pagination[pageSize]=${totalServices}&populate=*&`)
         .then(response => {
           const data = new modelDestino(response.data)
           setTipos(tipos)
@@ -43,11 +43,11 @@ const Home = () => {
           handleSendServiceFilter(selectOption)
         })
     })
-    axios.get('https://cms.trotatourism.com/api/tipo-servicios')
+    axios.get('https://cms-l4tiq.ondigitalocean.app/api/tipo-servicios')
     .then(response => {
       setTiposServicios(response.data.data)
     })
-    axios.get('https://cms.trotatourism.com/api/testimonios')
+    axios.get('https://cms-l4tiq.ondigitalocean.app/api/testimonios')
     .then(response => {
       setTestimonios(response.data.data)
     })
@@ -63,7 +63,7 @@ const Home = () => {
         }
       }
     })
-    axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&${query}`)
+    axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&${query}`)
     .then(response => {
       const servicios = new modelServicios(response.data.data)
         setDataServicios(servicios.servicios)
@@ -332,7 +332,7 @@ const Home = () => {
               return (
                 index <= 5 ?
                 <div className='Home-destinationContainer' onClick={() => navigate(`/landingTour/${servicio.id}`)}>
-                  <div className='Home-destinationImagen' style={{backgroundImage:`URL('https://cms.trotatourism.com/${servicio.portada}')`}}>
+                  <div className='Home-destinationImagen' style={{backgroundImage:`URL('https://cms-l4tiq.ondigitalocean.app${servicio.portada}')`}}>
     
                   </div>
                   <div className='Home-destinationBody'>

@@ -18,7 +18,7 @@ const LandingTour = () => {
   }, [])  
   
 const getToken = async () => {
-  await axios.get(`https://cms.trotatourism.com/api/servicios/${packageId}?populate=*`)
+  await axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios/${packageId}?populate=*`)
   .then(function (response) {
     // manejar respuesta exitosa
     console.log(response.data.data.attributes);
@@ -37,7 +37,7 @@ const getToken = async () => {
         <HeaderSecundary 
         title={trip?.titulo && trip?.titulo} 
         subtitle={trip?.locacion.description && trip?.locacion.description} 
-        img={`https://cms.trotatourism.com/${trip?.portada?.data?.attributes?.url}`&& `https://cms.trotatourism.com/${trip?.portada?.data?.attributes?.url}`} 
+        img={`https://cms-l4tiq.ondigitalocean.app${trip?.portada?.data?.attributes?.url}`&& `https://cms-l4tiq.ondigitalocean.app${trip?.portada?.data?.attributes?.url}`} 
         tipo={trip?.tipo_servicio.data.attributes.titulo}
         locacion={trip?.locacion}
         />
@@ -116,7 +116,7 @@ const getToken = async () => {
           <div className="landing-galleryContainer">
             {(trip?.galeria?.data && trip?.galeria?.data.length > 0) && trip?.galeria?.data.map(imagen => {
               return (
-                <div className='landing-img'><img src={`https://cms.trotatourism.com/${imagen.attributes.url}`} alt="" /></div>
+                <div className='landing-img'><img src={`https://cms-l4tiq.ondigitalocean.app${imagen.attributes.url}`} alt="" /></div>
               )
             })}
           </div>

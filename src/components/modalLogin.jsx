@@ -13,7 +13,7 @@ const ModalLogin = ({ activeModal, closeModal }) => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    axios.post('https://cms.trotatourism.com/api/auth/local', formLogin)
+    axios.post('https://cms-l4tiq.ondigitalocean.app/api/auth/local', formLogin)
     .then(response => {
       const data = response.data.user ? response.data.user : false
       if (data) {
@@ -27,7 +27,7 @@ const ModalLogin = ({ activeModal, closeModal }) => {
 
   const handleSignUp = (e) => {
     e.preventDefault()
-    axios.post('https://cms.trotatourism.com/api/auth/local/register', formSignUp, {
+    axios.post('https://cms-l4tiq.ondigitalocean.app/api/auth/local/register', formSignUp, {
       headers: {
         "Content-Type": "application/json",
       }

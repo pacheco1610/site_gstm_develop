@@ -33,7 +33,7 @@ const LandingDestino = () => {
   const user = useSelector((state) => state.user)
   
   useEffect(() => {
-    axios.get('https://cms.trotatourism.com/api/tipo-servicios')
+    axios.get('https://cms-l4tiq.ondigitalocean.app/api/tipo-servicios')
     .then(response => {
       setTiposServicios(response.data.data)
     })
@@ -70,13 +70,13 @@ const LandingDestino = () => {
         filters: objFilter
       })
 
-      axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&${queryCity}`).then(response => {
+      axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&${queryCity}`).then(response => {
         const tipos = new modelTipos(response.data)
         setDataFilter(tipos)
       })
       
 
-      axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&${query}`)
+      axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&${query}`)
       .then(response => {
         if (response?.data?.data?.length > 0) {
           const destino = new modelDestino(response.data)
@@ -108,13 +108,13 @@ const LandingDestino = () => {
         filters: objFilter
       })
 
-      axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&`).then(response => {
+      axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&`).then(response => {
         const tipos = new modelTipos(response.data)
         setDataFilter(tipos)
       })
       
 
-      axios.get(`https://cms.trotatourism.com/api/servicios?populate=*&${query}`)
+      axios.get(`https://cms-l4tiq.ondigitalocean.app/api/servicios?populate=*&${query}`)
       .then(response => {
         if (response?.data?.data?.length > 0) {
           const servicios = new modelServicios(response.data.data)
@@ -314,7 +314,7 @@ const LandingDestino = () => {
                 {servicios.length > 0 ? servicios.map(servicio => {
                     return(
                       <div className='Destinos-tourContainer'>
-                        <img src={`https://cms.trotatourism.com/${servicio.portada}`} alt="" />
+                        <img src={`https://cms-l4tiq.ondigitalocean.app${servicio.portada}`} alt="" />
                         <div className='Destinos-tourContainerText'>
                           <div className='Destinos-tourContainerText-header'>
                             <span>{servicio.tipo}</span>
