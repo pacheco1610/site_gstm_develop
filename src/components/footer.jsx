@@ -9,7 +9,7 @@ const Footer = () => {
             <h1>Contactanos</h1>
             <div className='footer-ItemContacto footer-itemContactNumber'>
               <span>Soporte al cliente</span>
-              <h1><a href="tel:7026903000">702-690-3000 Ext. 1002</a></h1>
+              <h1><a href="tel:+1 (725) 228-6406">+1 (725) 228-6406</a></h1>
             </div>
             <div className='footer-ItemContacto footer-itemContactNumber'>
               <span>Dirección</span>
@@ -20,14 +20,13 @@ const Footer = () => {
             <h1>Escríbenos</h1>
             <div className='footer-ItemContacto footer-itemContactNumber'>
               <span>Para mayor información</span>
-              <h1>info@trotatourism.com</h1>
+              <h1>reservations@gstmtravel.com</h1>
             </div>
             <div className='footer-ItemContacto footer-itemContactNumber'>
               <span>Redes</span>
               <div className='footer-redes'>
-                <a href="https://www.facebook.com/trotatourism" target='_blank'><i class="fa-brands fa-square-facebook"></i></a>
-                <a href="https://www.instagram.com/trotatourism/" target='_blank'><i class="fa-brands fa-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-square-x-twitter"></i></a>
+                <a href="https://www.facebook.com/globalsuppliertravelmarket" target='_blank'><i class="fa-brands fa-square-facebook"></i></a>
+                <a href="https://www.instagram.com/globalsuppliertravelmarket/" target='_blank'><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>
