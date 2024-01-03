@@ -332,8 +332,8 @@ const Home = () => {
               return (
                 index <= 5 ?
                 <div className='Home-destinationContainer' onClick={() => navigate(`/landingTour/${servicio.id}`)}>
-                  <div className='Home-destinationImagen' style={{backgroundImage:`URL('https://cms-l4tiq.ondigitalocean.app${servicio.portada}')`}}>
-    
+                  <div className='Home-destinationImagen' style={{backgroundImage:`URL('${servicio.portada}')`}}>
+  
                   </div>
                   <div className='Home-destinationBody'>
                     <div>

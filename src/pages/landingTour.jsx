@@ -37,7 +37,7 @@ const getToken = async () => {
         <HeaderSecundary 
         title={trip?.titulo && trip?.titulo} 
         subtitle={trip?.locacion.description && trip?.locacion.description} 
-        img={`https://cms-l4tiq.ondigitalocean.app${trip?.portada?.data?.attributes?.url}`&& `https://cms-l4tiq.ondigitalocean.app${trip?.portada?.data?.attributes?.url}`} 
+        img={ trip?.portada?.data?.attributes?.url && trip?.portada?.data?.attributes?.url } 
         tipo={trip?.tipo_servicio.data.attributes.titulo}
         locacion={trip?.locacion}
         />
