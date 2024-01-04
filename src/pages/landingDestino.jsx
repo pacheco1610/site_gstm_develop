@@ -314,7 +314,7 @@ const LandingDestino = () => {
                 {servicios.length > 0 ? servicios.map(servicio => {
                     return(
                       <div className='Destinos-tourContainer'>
-                        <img src={`https://cms-l4tiq.ondigitalocean.app${servicio.portada}`} alt="" />
+                        <img src={servicio.portada} alt="" />
                         <div className='Destinos-tourContainerText'>
                           <div className='Destinos-tourContainerText-header'>
                             <span>{servicio.tipo}</span>
