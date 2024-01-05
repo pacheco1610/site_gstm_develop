@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './styles/main.scss'
@@ -12,12 +12,14 @@ import Home from './pages/home'
 import About from './pages/about';
 import Destino from './pages/landingDestino';
 import LandingTour from './pages/landingTour';
-import {store} from './redux/store'
+import { store } from './redux/store'
+import CoomingSoon from './pages/coomingSoon'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <CoomingSoon/>,
   },  {
     path: "/about/:id",
     element: <About/>,
@@ -33,11 +35,12 @@ const router = createBrowserRouter([
   
 ]);
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
