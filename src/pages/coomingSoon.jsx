@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import img from '../assets/coming.jpg'
+import img from '../assets/cominsoon.jpg'
 import logo from '../assets/gstm-logo-blanco.png'
 
 const CoomingSoon = () => {
@@ -26,7 +26,7 @@ const CoomingSoon = () => {
     }, 1000);
   },[])
   return (
-    <div className='coomingsoonContainer' style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), URL(${img})`,}}>
+    <div className='coomingsoonContainer' style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), URL(${img})`,}}>
       <div className='coomingsoonWrapper'>
         <img src={logo}/>
         <h1>PRÓXIMAMENTE</h1>
