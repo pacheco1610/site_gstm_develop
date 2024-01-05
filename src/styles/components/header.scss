@@ -112,13 +112,14 @@
 .Header-Login {
   display: none;
   span {
-    color: $white;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    background-color: $primary;
     font-size: 15px;
     cursor: pointer;
   }
+}
+
+.Header-Register {
+  font-weight: bold;
+  padding: 0.5rem;
 }
 
 .Header-logout {
@@ -167,7 +168,6 @@
   .Header-Login {
     display: flex;
     justify-content: flex-end;
-    width: 30%;
   }
 
   .Header-li {
@@ -182,7 +182,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 40%;
+    width: 90%;
   }
 
   .Header-menuMobile {

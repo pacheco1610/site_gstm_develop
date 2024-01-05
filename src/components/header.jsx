@@ -63,33 +63,56 @@ const Header = () => {
                   )       
             }
             { user.activeLogin ? 
-              <div className='Header-logout logout-mobile' onClick={() => handleLogin()}>
+              <div className='Header-logout logout-mobile Header-li' onClick={() => handleLogin()}>
                 <span>{user.email}</span>
                 <i className="fa-duotone fa-right-from-bracket"></i>
               </div>
             
             : 
-              <div className='Header-Login login-mobile'>
+              <div className='Header-Login login-mobile Header-li'>
                 <span onClick={()=> setActiveLogin(true)}>
                   Iniciar Sesion
                 </span>
               </div>
+              
             }
-          </ul>
-        </div>
+            { user.activeLogin ? 
+            <></>
+            : 
+              <div className='login-mobile Header-li'>
+                <span onClick={()=> setActiveLogin(true)}>
+                  Registrate
+                </span>
+              </div>
+              
+            }
+
         { user.activeLogin ? 
-          <div className='Header-logout logout-desktop' onClick={() => handleLogin()}>
+          <div className='Header-logout logout-desktop Header-li' onClick={() => handleLogin()}>
             <span>{user.email}</span>
             <i className="fa-duotone fa-right-from-bracket"></i>
           </div>
          
         : 
-          <div className='Header-Login'>
+          <div className='Header-Login Header-li'>
             <span onClick={()=> setActiveLogin(true)}>
               Iniciar Sesion
             </span>
           </div>
         }
+    
+          { user.activeLogin ? 
+          <></>
+         
+        : 
+          <div className='Header-Login Header-li'>
+            <span onClick={()=> setActiveLogin(true)}>
+            Registrate
+            </span>
+          </div>
+        }
+                  </ul>
+        </div>
         <div className={ buttonClose } onClick={ () => setActiveMenu(!activeMenu) }>
           <div></div>
           <div></div>
