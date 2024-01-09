@@ -19,7 +19,7 @@ import CoomingSoon from './pages/coomingSoon'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CoomingSoon/>,
+    element: <Home/>,
   },  {
     path: "/about/:id",
     element: <About/>,
